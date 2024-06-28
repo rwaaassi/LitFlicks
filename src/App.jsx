@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Adaptations from "./pages/Adaptations/Adaptations";
 import Adaptation from "./pages/Adaptation/Adaptation";
 import Login from "./pages/Login/Login";
+import { AuthProvider } from "./context/AuthContext";
 
 import "./App.css";
 
@@ -35,7 +36,11 @@ const routes = [
 function App() {
   const router = createBrowserRouter(routes);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
