@@ -29,8 +29,8 @@ const Adaptations = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-rose-100">
-      <h1 className="text-3xl font-bold mb-4">All Adaptations</h1>
+    <div className="container mx-auto px-4 py-8 bg-orange-50">
+      {/* <h1 className="text-3xl font-bold mb-4">All Adaptations</h1> */}
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
       ) : (
@@ -41,11 +41,11 @@ const Adaptations = () => {
               className="bg-white rounded-lg shadow-md p-4"
             >
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1">
+                <div className="flex-1 ">
                   <img
                     src={adaptation.moviePoster}
                     alt={`Poster for ${adaptation.movieTitle}`}
-                    className="rounded-lg mb-4"
+                    className="rounded-lg mb-4 justify-around items-center"
                     style={{ maxHeight: "300px" }}
                   />
                   <h2 className="text-xl font-bold">{adaptation.movieTitle}</h2>
