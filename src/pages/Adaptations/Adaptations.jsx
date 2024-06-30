@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { getAdaptations } from "../../services/adaptationsApi"; 
+import { useNavigate } from "react-router-dom";
+
+
 const Adaptations = () => {
   const [adaptations, setAdaptations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchAdaptations = async () => {
       try {
@@ -19,6 +22,10 @@ const Adaptations = () => {
 
     fetchAdaptations();
   }, []);
+
+   const handleAdaptationClicked = (adaptation) => {
+     navigate(`/adaptation/${adaptation.id}`);
+   };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -38,7 +45,8 @@ const Adaptations = () => {
           {adaptations.map((adaptation) => (
             <li
               key={adaptation.id}
-              className="bg-white rounded-lg shadow-md p-4"
+              className="bg-white rounded-lg shadow-md p-4 cursor-pointer"
+              onClick={() => handleAdaptationClicked(adaptation)}
             >
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1 ">
