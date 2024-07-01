@@ -55,14 +55,19 @@ export const useAddAdaptation = () => {
   return { addAdaptation };
 };
 
-export const deleteAdaptation = async (adaptationId) => {
-  try {
-    const docRef = doc(db, "adaptations", adaptationId);
-    await deleteDoc(docRef);
-  } catch (error) {
-    throw new Error("Error deleting adaptation");
-  }
-};
+export const useDeleteAdaptation = () => {
+
+  const deleteAdaptation = async (adaptationId) => {
+    
+    try {
+      const docRef = doc(db, "adaptations", adaptationId);
+      await deleteDoc(docRef);
+    } catch (error) {
+      throw new Error("Error deleting adaptation");
+    }
+  };
+  return {deleteAdaptation}
+}
 
 export const updateAdaptation = async (adaptationId, updatedData) => {
   try {

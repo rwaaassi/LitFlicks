@@ -1,8 +1,8 @@
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import logo from "../../assets/litflicksLogo.png";
 
 function Navbar() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   return (
     <header className="bg-orange-50">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 bg-orange-50">
