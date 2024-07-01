@@ -1,6 +1,7 @@
 import  { useState, useEffect } from "react";
 import { getAdaptations } from "../../services/adaptationsApi"; 
 import { useNavigate } from "react-router-dom";
+import AddAdaptation from "../../Hooks/AddAdaptation";
 
 
 const Adaptations = () => {
@@ -8,6 +9,8 @@ const Adaptations = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate()
+ const [showAddAdaptationForm, setShowAddAdaptationForm] = useState(false);
+
   useEffect(() => {
     const fetchAdaptations = async () => {
       try {
@@ -36,7 +39,7 @@ const Adaptations = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-orange-50">
+    <div className="container mx-auto px-4 py-8 bg-orange-50 flex flex-col justify-center items-center gap-10">
       {/* <h1 className="text-3xl font-bold mb-4">All Adaptations</h1> */}
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
@@ -77,6 +80,16 @@ const Adaptations = () => {
             </li>
           ))}
         </ul>
+      )}
+      <button
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4 flex justify-center items-center"
+        onClick={() => setShowAddAdaptationForm(true)}
+      >
+        Add Adaptation
+      </button>
+
+      {showAddAdaptationForm && (
+        <AddAdaptation onClose={() => setShowAddAdaptationForm(false)} />
       )}
     </div>
   );

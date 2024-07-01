@@ -7,12 +7,15 @@ import {
   signOut,
 } from "firebase/auth";
 
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+ 
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -32,6 +35,7 @@ export const AuthProvider = ({ children }) => {
         password
       );
       setUser(userCredential.user);
+
       return userCredential.user;
     } catch (error) {
       setError(error);
@@ -47,15 +51,17 @@ export const AuthProvider = ({ children }) => {
         password
       );
       setUser(userCredential.user);
-      return userCredential.user;
     } catch (error) {
       setError(error);
     }
   };
+
   const logout = async () => {
     await signOut(auth);
     setUser(null);
   };
+  
+
 
   return (
     <AuthContext.Provider
@@ -65,38 +71,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
 export const useAuth = () => useContext(AuthContext);
-
-//   .then((userCredential) => {
-//     // Signed up
-//     const user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ..
-//   });
-
-//   signInWithEmailAndPassword(auth, email, password)
-//     .then((userCredential) => {
-//       // Signed in
-//       const user = userCredential.user;
-//       // ...
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//     });
-
-//     onAuthStateChanged(auth, (user) => {
-//       if (user) {
-//         // User is signed in, see docs for a list of available properties
-//         // https://firebase.google.com/docs/reference/js/auth.user
-//         const uid = user.uid;
-//         // ...
-//       } else {
-//         // User is signed out
-//         // ...
-//       }
-//     });

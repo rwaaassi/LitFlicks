@@ -1,7 +1,8 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/litflicksLogo.png";
 
 function Navbar() {
+  const navigate = useNavigate()
   return (
     <header className="bg-orange-50">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 bg-orange-50">
@@ -13,6 +14,7 @@ function Navbar() {
           <div>
             <nav>
               <ul className="flex items-center gap-6 text-sm">
+                <div></div>
                 <li>
                   <NavLink className="nav-items" to="/">
                     Home
@@ -23,27 +25,12 @@ function Navbar() {
                     Adaptations
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink className="nav-items" to="/adaptation">
-                    Adaptation
-                  </NavLink>
-                </li>
-                {/* <li>
-                  <NavLink
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                    to="/login"
-                  >
-                   
-                    Login
-                  </NavLink>
-                </li> */}
               </ul>
+              <button className="rounded-md bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-500 transition-colors ease-in-out">
+                Log in
+              </button>
             </nav>
           </div>
-
-          <button className="rounded-md bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-500 transition-colors ease-in-out">
-            Log out
-          </button>
         </div>
       </div>
       <Outlet />

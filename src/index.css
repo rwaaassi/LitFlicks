@@ -13,4 +13,6 @@
   @apply relative flex h-full items-center p-4 cursor-pointer font-bold text-amber-900 hover:text-amber-900 hover:bg-amber-800/10 transition-colors ease-in-out
 
   }
+ 
 }
+

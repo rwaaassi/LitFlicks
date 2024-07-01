@@ -1,12 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import {
   collection,
   doc,
   getDocs,
   getDoc,
-  setDoc,
   updateDoc,
   deleteDoc,
-  addDoc
+  addDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
@@ -19,7 +19,7 @@ export const getAdaptations = async () => {
     }));
     return adaptations;
   } catch (error) {
-     console.error("Error fetching adaptations:", error);
+    console.error("Error fetching adaptations:", error);
     throw new Error("Error fetching adaptations");
   }
 };
@@ -39,16 +39,21 @@ export const getAdaptationById = async (adaptationId) => {
   }
 };
 
-export const addAdaptation = async (adaptationData) => {
-  try {
-    const collectionRef = collection(db, "adaptations");
-    const docRef = await addDoc(collectionRef, adaptationData);
-    return { id: docRef.id, ...adaptationData };
-  } catch (error) {
-    throw new Error("Error adding adaptation");
-  }
-};
+export const useAddAdaptation = () => {
+  const navigate = useNavigate();
+  const addAdaptation = async (adaptationData) => {
+    try {
+      const collectionRef = collection(db, "adaptations");
+      const docRef = await addDoc(collectionRef, adaptationData);
+      navigate(`/adaptation/${docRef.id}`);
+      return { id: docRef.id, ...adaptationData };
+    } catch (error) {
+      throw new Error("Error adding adaptation");
+    }
+  };
 
+  return { addAdaptation };
+};
 
 export const deleteAdaptation = async (adaptationId) => {
   try {
