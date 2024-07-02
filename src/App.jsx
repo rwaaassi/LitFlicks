@@ -3,7 +3,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Adaptations from "./pages/Adaptations/Adaptations";
 import Adaptation from "./pages/Adaptation/Adaptation";
-import Login from "./pages/Login/Login";
+import Login from "./pages/Login/Login2";
+import Register from "./pages/Login/Register";
 import { AuthProvider } from "./context/AuthContext";
 
 import "./App.css";
@@ -28,7 +29,11 @@ const routes = [
       {
         path: "login",
         element: <Login />,
-      }
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
     ],
   },
 ];
