@@ -1,10 +1,39 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { onAuthStateListener, logoutUser } from "../../context/UsersApi";
+import { getAdaptations } from "../../services/adaptationsApi";
 import logo from "../../assets/litflicksLogo.png";
 
 function Navbar() {
 const [currentUser, setCurrentUser] = useState(null)
+ const [searchQuery, setSearchQuery] = useState("");
+ const [adaptations, setAdaptations] = useState([]);
+ const [filteredAdaptations, setFilteredAdaptations] = useState([]);
+
+ useEffect(() => {
+   const fetchAdaptations = async () => {
+     try {
+       const adaptationsData = await getAdaptations();
+       setAdaptations(adaptationsData);
+     } catch (error) {
+       console.error("Error fetching adaptations:", error);
+     }
+   };
+
+   fetchAdaptations();
+ }, []);
+
+ useEffect(() => {
+   // Filter adaptations based on searchQuery
+   const filtered = adaptations.filter((adaptation) =>
+     adaptation.bookTitle.toLowerCase().startsWith(searchQuery.toLowerCase())
+   );
+   setFilteredAdaptations(filtered);
+ }, [searchQuery, adaptations]);
+
+ const handleSearchInputChange = (e) => {
+   setSearchQuery(e.target.value);
+ };
 
 useEffect (() => {
   const unsubscribe = onAuthStateListener(setCurrentUser)
@@ -61,6 +90,29 @@ const handleLogout = () => {
                 )}
               </ul>
             </nav>
+          </div>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search For Adaptation"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              className="block w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+            {searchQuery && filteredAdaptations.length > 0 && (
+              <div className="absolute left-0 right-0 mt-1 bg-white rounded-md shadow-lg border border-gray-200 z-10">
+                <ul className="py-1">
+                  {filteredAdaptations.map((adaptation) => (
+                    <li
+                      key={adaptation.id}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >
+                      {adaptation.bookTitle}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
