@@ -30,6 +30,8 @@ const Adaptation = () => {
   const [comment, setComment] = useState([]);
   const [commentId, setCommentId] = useState(null);
   const [hasCommented, setHasCommented] = useState(false);
+  const [allComments, setAllComments] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     const fetchAdaptation = async () => {
@@ -39,6 +41,8 @@ const Adaptation = () => {
           adaptationData.tableData = [];
         }
         setAdaptation(adaptationData);
+        const comments = await getAllComments(adaptationId);
+        setAllComments(comments);
       } catch (error) {
         console.error("Error fetching adaptation :", error);
       } finally {
@@ -63,6 +67,7 @@ const Adaptation = () => {
 
     return () => unsubscribe();
   }, [adaptationId]);
+
   const fetchUserComment = async (userId, adaptationId) => {
     try {
       const userComment = await getUserComment(userId, adaptationId);
@@ -79,7 +84,6 @@ const Adaptation = () => {
       console.error("Error fetching user comment:", error);
     }
   };
-
   const handleSave = async (field, value) => {
     await updateAdaptation(adaptation.id, { [field]: value });
     setAdaptation((prev) => ({ ...prev, [field]: value }));
@@ -96,25 +100,28 @@ const Adaptation = () => {
     setComment(e.target.value);
   };
 
-  const handleCommentSave = async () => {
-    if (user && comment.trim()) {
-      try {
-        if (commentId) {
-          await saveUserComment(
-            user.uid,
-            adaptationId,
-            comment.trim(),
-            commentId
-          );
-        } else {
-          await saveUserComment(user.uid, adaptationId, comment.trim());
-        }
-        setHasCommented(true);
-      } catch (error) {
-        console.error("Error saving comment:", error);
-      }
-    }
-  };
+   const handleCommentSave = async () => {
+     if (user && comment.trim()) {
+       try {
+         if (commentId) {
+           await saveUserComment(
+             user.uid,
+             adaptationId,
+             comment.trim(),
+             commentId
+           );
+         } else {
+           await saveUserComment(user.uid, adaptationId, comment.trim());
+         }
+         setHasCommented(true);
+         setEditMode(false);
+         const comments = await getAllComments(adaptationId);
+         setAllComments(comments);
+       } catch (error) {
+         console.error("Error saving comment:", error);
+       }
+     }
+   };
 
   const handleCommentDelete = async () => {
     if (user && commentId) {
@@ -123,24 +130,40 @@ const Adaptation = () => {
         setComment("");
         setCommentId(null);
         setHasCommented(false);
+        setEditMode(false);
+        const comments = await getAllComments(adaptationId);
+        setAllComments(comments);
       } catch (error) {
         console.error("Error deleting comment:", error);
       }
     }
   };
 
-  const handleGetAllComments = async () => {
-    try {
-      const userComment = await getUserComment(user.uid, adaptationId);
-      if (userComment) {
-        setComment(userComment.text);
-        setHasCommented(true);
-      }
-    } catch (error) {
-      console.error("Error fetching user comment:", error);
-    }
-    console.log(comment);
+  const handleEditComment = () => {
+    setEditMode(true);
   };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+  };
+
+
+  const handleAddComment = () => {
+    setEditMode(true);
+  };
+
+  // const handleGetAllComments = async () => {
+  //   try {
+  //     const userComment = await getUserComment(user.uid, adaptationId);
+  //     if (userComment) {
+  //       setComment(userComment.text);
+  //       setHasCommented(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching user comment:", error);
+  //   }
+  //   console.log(comment);
+  // };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -335,7 +358,77 @@ const Adaptation = () => {
 
       {isAdmin && <DeleteAdaptation adaptation={adaptation} />}
 
-      {!isAdmin && (
+      <div className="bg-white p-4 rounded-lg shadow-md mt-4">
+        <h3 className="text-lg font-semibold mb-2">Comments</h3>
+        <div className="space-y-4">
+          {/* Display all comments */}
+          {allComments.map((comment) => (
+            <div key={comment.id} className="border-b border-gray-200 pb-2">
+              <p className="text-sm text-gray-600">
+                <strong>{comment.email}:</strong> {comment.text}
+              </p>
+            </div>
+          ))}
+        </div>
+        {!isAdmin && (
+          <div>
+            <h3 className="text-lg font-semibold mt-4 mb-2">Your Comment</h3>
+            {editMode ? (
+              <>
+                <textarea
+                  className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+                  value={comment}
+                  onChange={handleCommentChange}
+                />
+                <div className="flex justify-end space-x-2">
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    onClick={handleCommentSave}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+                    onClick={handleCancelEdit}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                {hasCommented ? (
+                  <>
+                    <p>{comment}</p>
+                    <div className="flex justify-end space-x-2">
+                      <button
+                        className="bg-green-500 text-white px-4 py-2 rounded-lg"
+                        onClick={handleEditComment}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                        onClick={handleCommentDelete}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    onClick={handleAddComment}
+                  >
+                    Add Comment
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        )}
+      </div>
+      {/* {!isAdmin && (
         <div className="bg-white p-4 rounded-lg shadow-md mt-4">
           <h3 className="text-lg font-semibold mb-2">Your Comment</h3>
           <textarea
@@ -362,7 +455,7 @@ const Adaptation = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

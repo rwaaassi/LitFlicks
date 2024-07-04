@@ -99,18 +99,49 @@ export const getUserComment = async (userId, adaptationId) => {
 
 // Get all comments for an adaptation
 export const getAllComments = async (adaptationId) => {
-  const commentsCollectionRef = collection(db, "adaptations", adaptationId, "comments");
-  const commentSnapshot = await getDocs(commentsCollectionRef);
-  return commentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  const commentsColRef = collection(
+    db,
+    "adaptations",
+    adaptationId,
+    "comments"
+  );
+  const commentSnapshot = await getDocs(commentsColRef);
+  const comments = commentSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+  return comments;
 };
 
 // Save user comment
+
+const getUserEmail = async (userId) => {
+  const userDocRef = doc(db, "users", userId); // Assuming user data is stored in a 'users' collection
+  const userDoc = await getDoc(userDocRef);
+  return userDoc.exists() ? userDoc.data().email : null;
+};
+
 export const saveUserComment = async (userId, adaptationId, text) => {
-  const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
-  await setDoc(commentDocRef, { userId, text });
+  const userEmail = await getUserEmail(userId);
+
+  const commentDocRef = doc(
+    db,
+    "adaptations",
+    adaptationId,
+    "comments",
+    userId
+  );
+  await setDoc(commentDocRef, { userId, email: userEmail, text });
   const commentDoc = await getDoc(commentDocRef);
   return { id: commentDoc.id, ...commentDoc.data() };
 };
+
+// export const saveUserComment = async (userId, adaptationId, text) => {
+//   const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
+//   await setDoc(commentDocRef, { userId, text });
+//   const commentDoc = await getDoc(commentDocRef);
+//   return { id: commentDoc.id, ...commentDoc.data() };
+// };
 
 // Delete user comment
 export const deleteUserComment = async (userId, adaptationId) => {
