@@ -116,7 +116,7 @@ export const getAllComments = async (adaptationId) => {
 // Save user comment
 
 const getUserEmail = async (userId) => {
-  const userDocRef = doc(db, "users", userId); // Assuming user data is stored in a 'users' collection
+  const userDocRef = doc(db, "users", userId); 
   const userDoc = await getDoc(userDocRef);
   return userDoc.exists() ? userDoc.data().email : null;
 };

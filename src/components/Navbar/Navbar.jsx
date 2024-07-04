@@ -1,48 +1,56 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { onAuthStateListener, logoutUser } from "../../context/UsersApi";
 import { getAdaptations } from "../../services/adaptationsApi";
 import logo from "../../assets/litflicksLogo.png";
 
 function Navbar() {
-const [currentUser, setCurrentUser] = useState(null)
- const [searchQuery, setSearchQuery] = useState("");
- const [adaptations, setAdaptations] = useState([]);
- const [filteredAdaptations, setFilteredAdaptations] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [adaptations, setAdaptations] = useState([]);
+  const [filteredAdaptations, setFilteredAdaptations] = useState([]);
+  const navigate = useNavigate()
 
- useEffect(() => {
-   const fetchAdaptations = async () => {
-     try {
-       const adaptationsData = await getAdaptations();
-       setAdaptations(adaptationsData);
-     } catch (error) {
-       console.error("Error fetching adaptations:", error);
-     }
-   };
+  useEffect(() => {
+    const fetchAdaptations = async () => {
+      try {
+        const adaptationsData = await getAdaptations();
+        setAdaptations(adaptationsData);
+      } catch (error) {
+        console.error("Error fetching adaptations:", error);
+      }
+    };
 
-   fetchAdaptations();
- }, []);
+    fetchAdaptations();
+  }, []);
 
- useEffect(() => {
-   // Filter adaptations based on searchQuery
-   const filtered = adaptations.filter((adaptation) =>
-     adaptation.bookTitle.toLowerCase().startsWith(searchQuery.toLowerCase())
-   );
-   setFilteredAdaptations(filtered);
- }, [searchQuery, adaptations]);
+  useEffect(() => {
+    // Filter adaptations based on searchQuery
+    const filtered = adaptations.filter((adaptation) =>
+      adaptation.bookTitle.toLowerCase().startsWith(searchQuery.toLowerCase())
+    );
+    setFilteredAdaptations(filtered);
+  }, [searchQuery, adaptations]);
 
- const handleSearchInputChange = (e) => {
-   setSearchQuery(e.target.value);
- };
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
-useEffect (() => {
-  const unsubscribe = onAuthStateListener(setCurrentUser)
-  return () => unsubscribe
-}, [])
+  useEffect(() => {
+    const unsubscribe = onAuthStateListener(setCurrentUser);
+    return () => unsubscribe;
+  }, []);
 
-const handleLogout = () => {
-  logoutUser()
-}
+  const handleLogout = () => {
+    logoutUser();
+  };
+
+  const handleSearchResultClicked = (adaptation) => {
+       navigate(`/adaptation/${adaptation.id}`);
+       setSearchQuery("");
+     };
+
+   
 
   return (
     <header className="bg-orange-50">
@@ -106,6 +114,7 @@ const handleLogout = () => {
                     <li
                       key={adaptation.id}
                       className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSearchResultClicked(adaptation)}
                     >
                       {adaptation.bookTitle}
                     </li>

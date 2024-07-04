@@ -1,8 +1,10 @@
+
 import { auth, db } from "../firebase/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged, signOut
+  onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -26,33 +28,33 @@ const registerUser = async (email, password) => {
   }
 };
 
+const loginUser = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
 
-  const loginUser = async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
-        if (userData.role === "admin") {
-          console.log("User is an admin");
-          setIsAdmin(true); 
-        } else {
-          console.log("User logged in: ", user);
-          setIsAdmin(false);
-        }
+    // const [isAdmin, setIsAdmin] = useState(false);
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      if (userData.role === "admin") {
+        console.log("User is an admin");
+        setIsAdmin(true);
       } else {
-        console.log("No such user document!");
+        console.log("User logged in: ", user);
+        setIsAdmin(false);
       }
-    } catch (error) {
-      console.error("Error logging in user: ", error);
+    } else {
+      console.log("No such user document!");
     }
-  };
+  } catch (error) {
+    console.error("Error logging in user: ", error);
+  }
+};
 
 // const loginUser = async (email, password) => {
 //   try {

@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom"; 
-import { useDeleteAdaptation } from "../services/adaptationsApi"; 
+import { useNavigate } from "react-router-dom";
+import { useDeleteAdaptation } from "../services/adaptationsApi";
 
 const DeleteAdaptation = ({ adaptation }) => {
   const navigate = useNavigate();
-  const {deleteAdaptation} = useDeleteAdaptation()
+  const { deleteAdaptation } = useDeleteAdaptation();
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
@@ -12,7 +12,7 @@ const DeleteAdaptation = ({ adaptation }) => {
     if (confirmDelete && adaptation && adaptation.id) {
       try {
         await deleteAdaptation(adaptation.id);
-        navigate("/adaptations"); 
+        navigate("/adaptations");
       } catch (error) {
         console.error("Failed to delete adaptation:", error);
       }
@@ -22,7 +22,7 @@ const DeleteAdaptation = ({ adaptation }) => {
   return (
     <div>
       <button
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4 flex justify-center items-center"
+        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 mb-4"
         onClick={handleDelete}
       >
         Delete Adaptation
