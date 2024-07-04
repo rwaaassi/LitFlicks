@@ -7,8 +7,10 @@ import {
   updateDoc,
   deleteDoc,
   addDoc,
+  setDoc
 } from "firebase/firestore";
-import { db } from "../firebase/firebaseConfig";
+import {auth, db } from "../firebase/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const getAdaptations = async () => {
   try {
@@ -83,3 +85,40 @@ export const useUpdateAdaptation = () => {
   };
   return {updateAdaptation}
 }
+
+// Get user comment
+export const getUserComment = async (userId, adaptationId) => {
+  const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
+  const commentDoc = await getDoc(commentDocRef);
+  if (commentDoc.exists()) {
+    return { id: commentDoc.id, ...commentDoc.data() };
+  } else {
+    return null;
+  }
+};
+
+// Get all comments for an adaptation
+export const getAllComments = async (adaptationId) => {
+  const commentsCollectionRef = collection(db, "adaptations", adaptationId, "comments");
+  const commentSnapshot = await getDocs(commentsCollectionRef);
+  return commentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
+
+// Save user comment
+export const saveUserComment = async (userId, adaptationId, text) => {
+  const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
+  await setDoc(commentDocRef, { userId, text });
+  const commentDoc = await getDoc(commentDocRef);
+  return { id: commentDoc.id, ...commentDoc.data() };
+};
+
+// Delete user comment
+export const deleteUserComment = async (userId, adaptationId) => {
+  const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
+  await deleteDoc(commentDocRef);
+};
+
+// Listen to auth state
+export const authState = (callback) => {
+  return onAuthStateChanged(auth, callback);
+};

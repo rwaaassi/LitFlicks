@@ -1,7 +1,8 @@
 import  { useState, useEffect } from "react";
-import { getAdaptations } from "../../services/adaptationsApi"; 
+import { getAdaptations} from "../../services/adaptationsApi"; 
 import { useNavigate } from "react-router-dom";
 import AddAdaptation from "../../Hooks/AddAdaptation";
+import { onAuthStateListener } from "../../context/UsersApi";
 
 
 const Adaptations = () => {
@@ -10,6 +11,7 @@ const Adaptations = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate()
  const [showAddAdaptationForm, setShowAddAdaptationForm] = useState(false);
+   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchAdaptations = async () => {
@@ -24,7 +26,17 @@ const Adaptations = () => {
     };
 
     fetchAdaptations();
+
+     onAuthStateListener((user) => {
+       if (user) {
+         setIsAdmin(user.role === "admin");
+       } else {
+         setIsAdmin(false);
+       }
+     });
   }, []);
+
+  console.log(adaptations);
 
    const handleAdaptationClicked = (adaptation) => {
      navigate(`/adaptation/${adaptation.id}`);
@@ -40,7 +52,6 @@ const Adaptations = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 bg-orange-50 flex flex-col justify-center items-center gap-10">
-      {/* <h1 className="text-3xl font-bold mb-4">All Adaptations</h1> */}
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
       ) : (
@@ -52,11 +63,11 @@ const Adaptations = () => {
               onClick={() => handleAdaptationClicked(adaptation)}
             >
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1 ">
+                <div className="flex-1">
                   <img
                     src={adaptation.moviePoster}
                     alt={`Poster for ${adaptation.movieTitle}`}
-                    className="rounded-lg mb-4 justify-around items-center"
+                    className="rounded-lg mb-4"
                     style={{ maxHeight: "300px" }}
                   />
                   <h2 className="text-xl font-bold">{adaptation.movieTitle}</h2>
@@ -81,15 +92,20 @@ const Adaptations = () => {
           ))}
         </ul>
       )}
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4 flex justify-center items-center"
-        onClick={() => setShowAddAdaptationForm(true)}
-      >
-        Add Adaptation
-      </button>
 
-      {showAddAdaptationForm && (
-        <AddAdaptation onClose={() => setShowAddAdaptationForm(false)} />
+      {isAdmin && (
+        <>
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4 flex justify-center items-center"
+            onClick={() => setShowAddAdaptationForm(true)}
+          >
+            Add Adaptation
+          </button>
+
+          {showAddAdaptationForm && (
+            <AddAdaptation onClose={() => setShowAddAdaptationForm(false)} />
+          )}
+        </>
       )}
     </div>
   );

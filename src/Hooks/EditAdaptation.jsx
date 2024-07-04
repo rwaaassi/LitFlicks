@@ -1,11 +1,19 @@
-import { useState } from "react";
-import { useUpdateAdaptation } from "../services/adaptationsApi";
+import { useState, useEffect } from "react";
+
 import { CiEdit } from "react-icons/ci";
 
-const EditAdaptation = ({ label, value, adaptationId, onSave }) => {
+const EditAdaptation = ({
+  label,
+  value = "",
+
+  onSave,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value);
-  const { updateAdaptation } = useUpdateAdaptation();
+
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -20,14 +28,8 @@ const EditAdaptation = ({ label, value, adaptationId, onSave }) => {
       return;
     }
 
-    try {
-      const updatedData = { [label]: inputValue };
-      await updateAdaptation(adaptationId, updatedData);
-      setIsEditing(false);
-      onSave(inputValue);
-    } catch (error) {
-      console.error("Failed to update adaptation:", error);
-    }
+    setIsEditing(false);
+    onSave(inputValue);
   };
 
   const handleCancelClick = () => {

@@ -1,13 +1,14 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { authStateListener, logoutUser } from "../../context/UsersApi";
+import { onAuthStateListener, logoutUser } from "../../context/UsersApi";
 import logo from "../../assets/litflicksLogo.png";
 
 function Navbar() {
 const [currentUser, setCurrentUser] = useState(null)
 
 useEffect (() => {
-  authStateListener(setCurrentUser)
+  const unsubscribe = onAuthStateListener(setCurrentUser)
+  return () => unsubscribe
 }, [])
 
 const handleLogout = () => {

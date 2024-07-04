@@ -15,6 +15,11 @@ const AddAdaptation = ({ onClose }) => {
     movieDuration: "",
     movieDirector: "",
     movieDesc: "",
+    comparison: "",
+      "tableData": [
+        ["Row 1, Col 1", "Row 1, Col 2", "Row 1, Col 3", "Row 1, Col 4", "Row 1, Col 5"],
+        ["Row 2, Col 1", "Row 2, Col 2", "Row 2, Col 3", "Row 2, Col 4", "Row 2, Col 5"]],
+        comments: []
   });
 
   const handleAddAdaptation = async (e) => {
@@ -124,6 +129,14 @@ const AddAdaptation = ({ onClose }) => {
           value={newAdaptation.movieDesc}
           onChange={(e) =>
             setNewAdaptation({ ...newAdaptation, movieDesc: e.target.value })
+          }
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <textarea
+          placeholder="Comparison"
+          value={newAdaptation.comparison}
+          onChange={(e) =>
+            setNewAdaptation({ ...newAdaptation, comparison: e.target.value })
           }
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />

@@ -26,18 +26,46 @@ const registerUser = async (email, password) => {
   }
 };
 
-const loginUser = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    console.log("User logged in: ", userCredential.user);
-  } catch (error) {
-    console.error("Error logging in user: ", error);
-  }
-};
+
+  const loginUser = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        if (userData.role === "admin") {
+          console.log("User is an admin");
+          setIsAdmin(true); 
+        } else {
+          console.log("User logged in: ", user);
+          setIsAdmin(false);
+        }
+      } else {
+        console.log("No such user document!");
+      }
+    } catch (error) {
+      console.error("Error logging in user: ", error);
+    }
+  };
+
+// const loginUser = async (email, password) => {
+//   try {
+//     const userCredential = await signInWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+//     console.log("User logged in: ", userCredential.user);
+//   } catch (error) {
+//     console.error("Error logging in user: ", error);
+//   }
+// };
 
 const logoutUser = async () => {
   try {
@@ -48,7 +76,7 @@ const logoutUser = async () => {
   }
 };
 
-const authStateListener = (callback) => {
+const onAuthStateListener = (callback) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       getDoc(doc(db, "users", user.uid))
@@ -70,4 +98,4 @@ const authStateListener = (callback) => {
   });
 };
 
-export { registerUser, loginUser, authStateListener, logoutUser };
+export { registerUser, loginUser, onAuthStateListener, logoutUser };
