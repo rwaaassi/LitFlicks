@@ -13,7 +13,7 @@ import DeleteAdaptation from "../../Hooks/DeleteAdaptation";
 import EditAdaptation from "../../Hooks/EditAdaptation";
 import EditableTableCell from "../../components/EditableTabelCell";
 import { onAuthStateListener } from "../../context/UsersApi";
-
+import {renderComparison} from "../../Hooks/EditAdaptation"
 const Adaptation = () => {
   const { adaptationId } = useParams();
   const [adaptation, setAdaptation] = useState(null);
@@ -216,10 +216,10 @@ setComment(e.target.value)
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col p-10 sm:flex-row gap-4 w-full">
         {/* Movie Details */}
-        <div className="flex-1">
-          <div className="relative">
+        <div className="flex-1 flex gap-10 bg-white">
+          <div className="relative w-1/2">
             {isAdmin && (
               <EditAdaptation
                 adaptationId={adaptationId}
@@ -229,12 +229,11 @@ setComment(e.target.value)
             <img
               src={adaptation.moviePoster}
               alt={`Poster for ${adaptation.movieTitle}`}
-              className="rounded-lg mb-4 object-cover"
-              style={{ maxHeight: "300px" }}
+              className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4 "
             />
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center">
+          <div className="flex flex-col justify-center pl-4 w-1/2">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.movieTitle}
@@ -242,10 +241,12 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("movieTitle", value)}
                 />
               ) : (
-                <h2>{adaptation.movieTitle}</h2>
+                <h2 className="text-2xl font-bold">
+                  Title: {adaptation.movieTitle}
+                </h2>
               )}
             </div>
-            <div className="flex items-center">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.movieDirector}
@@ -253,10 +254,10 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("movieDirector", value)}
                 />
               ) : (
-                <p>{adaptation.movieDirector}</p>
+                <p className="text-xl">Director: {adaptation.movieDirector}</p>
               )}
             </div>
-            <div className="flex items-center">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.movieDuration}
@@ -264,10 +265,12 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("movieDuration", value)}
                 />
               ) : (
-                <p>{adaptation.movieDuration}</p>
+                <p className="text-xl">
+                  Duration: {adaptation.movieDuration} minutes
+                </p>
               )}
             </div>
-            <div className="flex items-center">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.movieDesc}
@@ -275,15 +278,15 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("movieDesc", value)}
                 />
               ) : (
-                <p>{adaptation.movieDesc}</p>
+                <p className="text-xl">Description: {adaptation.movieDesc}</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Book Details */}
-        <div className="flex-1">
-          <div className="relative">
+        <div className="flex-1 flex gap-10 bg-white">
+          <div className="relative w-1/2">
             {isAdmin && (
               <EditAdaptation
                 adaptationId={adaptationId}
@@ -293,12 +296,11 @@ setComment(e.target.value)
             <img
               src={adaptation.bookImage}
               alt={`Cover for ${adaptation.bookTitle}`}
-              className="rounded-lg mb-4 object-cover"
-              style={{ maxHeight: "300px" }}
+              className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4"
             />
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center">
+          <div className="flex flex-col justify-center pl-4 w-1/2">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.bookTitle}
@@ -306,10 +308,12 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("bookTitle", value)}
                 />
               ) : (
-                <h2>{adaptation.bookTitle}</h2>
+                <h2 className="text-2xl font-bold">
+                  Title: {adaptation.bookTitle}
+                </h2>
               )}
             </div>
-            <div className="flex items-center">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.bookAuthor}
@@ -317,10 +321,10 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("bookAuthor", value)}
                 />
               ) : (
-                <p>{adaptation.bookAuthor}</p>
+                <p className="text-xl">Author: {adaptation.bookAuthor}</p>
               )}
             </div>
-            <div className="flex items-center">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.bookPages}
@@ -328,10 +332,10 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("bookPages", value)}
                 />
               ) : (
-                <p>{adaptation.bookPages}</p>
+                <p className="text-xl">Pages: {adaptation.bookPages}</p>
               )}
             </div>
-            <div className="flex items-center">
+            <div className="mb-2">
               {isAdmin ? (
                 <EditAdaptation
                   value={adaptation.bookDesc}
@@ -339,23 +343,24 @@ setComment(e.target.value)
                   onSave={(value) => handleSave("bookDesc", value)}
                 />
               ) : (
-                <p>{adaptation.bookDesc}</p>
+                <p className="text-xl">Description: {adaptation.bookDesc}</p>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="p-5 bg-red-200 mt-5 mb-5">
-        <h1>Comparison</h1>
+      <div className="p-5 mt-5 mb-5 w-[60%] flex flex-col justify-center text-pretty object-center ml-[350px]">
+        <h1 className="text-2xl p-3 font-bold">Comparison</h1>
         {isAdmin ? (
           <EditAdaptation
+            label="comparison"
             value={adaptation.comparison}
-            adaptationId={adaptationId}
             onSave={(value) => handleSave("comparison", value)}
+           
           />
         ) : (
-          <p>{adaptation.comparison}</p>
+          <div >{renderComparison(adaptation.comparison)}</div>
         )}
       </div>
 

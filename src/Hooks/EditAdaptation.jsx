@@ -37,46 +37,73 @@ const EditAdaptation = ({
     setInputValue(value);
   };
 
+const handleInputChange = (e) => {
+  setInputValue(e.target.value);
+};
+
+const handleKeyDown = (e) => {
+  if (e.key === "Enter" && !isNaN(inputValue)) {
+    e.preventDefault();
+    onSave(inputValue.trim().split(/\s+/).join("\n"));
+    setIsEditing(false);
+  }
+};
+
+
+ 
+
+
   return (
     <div className="flex items-center">
       {isEditing ? (
         <>
-          <input
-            type={
-              label === "bookPages" || label === "movieDuration"
-                ? "number"
-                : "text"
-            }
+          <textarea
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="border border-gray-300 p-1 mr-2"
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            className="border border-gray-300 p-1 mr-2 w-full resize-y"
+            rows={3} // Set initial number of rows based on content height
           />
-          <button onClick={handleSaveClick} className="mr-2">
+          <button
+            onClick={handleSaveClick}
+            className="mr-2 bg-red-500 rounded-lg p-1 text-white hover:bg-red-400"
+          >
             Save
           </button>
-          <button onClick={handleCancelClick} className="">
+          <button
+            onClick={handleCancelClick}
+            className="mr-2 bg-red-500 rounded-lg p-1 text-white hover:bg-red-400"
+          >
             Cancel
           </button>
         </>
       ) : (
         <>
-          <p className="mr-2">
-            {label === "moviePoster" || label === "bookImage" ? (
-              <img
-                src={value}
-                alt={`${label}`}
-                className="w-24 h-24 object-cover mr-2"
-              />
-            ) : (
-              value
-            )}
-          </p>
+          <div>{renderComparison(value)}</div>
           <button onClick={handleEditClick} className="ml-2">
             <CiEdit />
           </button>
         </>
       )}
     </div>
+  );
+};
+
+export const renderComparison = (text) => {
+  if (!text || typeof text !== "string") return null;
+  const points = text.split("\n").filter((point) => point.trim() !== "");
+  return (
+    <ul>
+      {points.map((point, index) => (
+        <li key={index} className="tracking-wide leading-8">
+          <strong>
+          {point}
+          
+          </strong>
+
+          </li>
+      ))}
+    </ul>
   );
 };
 
