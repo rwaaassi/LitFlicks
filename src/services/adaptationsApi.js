@@ -41,16 +41,31 @@ export const getAdaptationById = async (adaptationId) => {
   }
 };
 
+// export const useAddAdaptation = () => {
+//   const navigate = useNavigate();
+//   const addAdaptation = async (adaptationData) => {
+//     try {
+//       const collectionRef = collection(db, "adaptations");
+//       const docRef = await addDoc(collectionRef, adaptationData);
+//       navigate(`/adaptation/${docRef.id}`);
+//       return { id: docRef.id, ...adaptationData };
+//     } catch (error) {
+//       throw new Error("Error adding adaptation");
+//     }
+//   };
+
+//   return { addAdaptation };
+// };
+
 export const useAddAdaptation = () => {
-  const navigate = useNavigate();
   const addAdaptation = async (adaptationData) => {
     try {
       const collectionRef = collection(db, "adaptations");
       const docRef = await addDoc(collectionRef, adaptationData);
-      navigate(`/adaptation/${docRef.id}`);
-      return { id: docRef.id, ...adaptationData };
+      return { id: docRef.id, ...adaptationData }; // Return the added document data
     } catch (error) {
-      throw new Error("Error adding adaptation");
+      console.error("Error adding adaptation:", error.message);
+      throw new Error("Error adding adaptation"); // Throw the error for higher level handling
     }
   };
 

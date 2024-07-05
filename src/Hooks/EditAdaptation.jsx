@@ -62,7 +62,7 @@ const handleKeyDown = (e) => {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             className="border border-gray-300 p-1 mr-2 w-full resize-y"
-            rows={3} // Set initial number of rows based on content height
+            rows={2} 
           />
           <button
             onClick={handleSaveClick}

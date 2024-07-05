@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useAddAdaptation } from "../services/adaptationsApi";
 
-
 const AddAdaptation = ({ onClose }) => {
-  const {addAdaptation} = useAddAdaptation();
+  const { addAdaptation } = useAddAdaptation();
   const [newAdaptation, setNewAdaptation] = useState({
     bookTitle: "",
     bookPages: "",
@@ -16,20 +15,47 @@ const AddAdaptation = ({ onClose }) => {
     movieDirector: "",
     movieDesc: "",
     comparison: "",
-      "tableData": [
-        ["Row 1, Col 1", "Row 1, Col 2", "Row 1, Col 3", "Row 1, Col 4", "Row 1, Col 5"],
-        ["Row 2, Col 1", "Row 2, Col 2", "Row 2, Col 3", "Row 2, Col 4", "Row 2, Col 5"]],
-        comments: []
+    tableData: [
+      [
+        "Row 1, Col 1",
+        "Row 1, Col 2",
+        "Row 1, Col 3",
+        "Row 1, Col 4",
+        "Row 1, Col 5",
+      ],
+      [
+        "Row 2, Col 1",
+        "Row 2, Col 2",
+        "Row 2, Col 3",
+        "Row 2, Col 4",
+        "Row 2, Col 5",
+      ],
+    ],
+    comments: [],
   });
 
   const handleAddAdaptation = async (e) => {
     e.preventDefault();
+
+    // Transform tableData into a flat structure
+    const flatTableData = newAdaptation.tableData.flat();
+
+    const transformedAdaptation = {
+      ...newAdaptation,
+      tableData: flatTableData,
+    };
+
     try {
-      await addAdaptation(newAdaptation);
+      await addAdaptation(transformedAdaptation);
       onClose();
     } catch (error) {
       console.error("Error adding adaptation:", error);
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewAdaptation({ ...newAdaptation, [name]: value });
   };
 
   return (
@@ -40,104 +66,87 @@ const AddAdaptation = ({ onClose }) => {
       <form onSubmit={handleAddAdaptation} className="space-y-4">
         <input
           type="text"
+          name="bookTitle"
           placeholder="Book Title"
           value={newAdaptation.bookTitle}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, bookTitle: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="bookPages"
           placeholder="Book Pages"
           value={newAdaptation.bookPages}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, bookPages: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="bookImage"
           placeholder="Book Image URL"
           value={newAdaptation.bookImage}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, bookImage: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="bookAuthor"
           placeholder="Book Author"
           value={newAdaptation.bookAuthor}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, bookAuthor: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <textarea
           placeholder="Book Description"
+          name="bookDesc"
           value={newAdaptation.bookDesc}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, bookDesc: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="movieTitle"
           placeholder="Movie Title"
           value={newAdaptation.movieTitle}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, movieTitle: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="moviePoster"
           placeholder="Movie Poster URL"
           value={newAdaptation.moviePoster}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, moviePoster: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="movieDuration"
           placeholder="Movie Duration"
           value={newAdaptation.movieDuration}
-          onChange={(e) =>
-            setNewAdaptation({
-              ...newAdaptation,
-              movieDuration: e.target.value,
-            })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <input
           type="text"
+          name="movieDirector"
           placeholder="Movie Director"
           value={newAdaptation.movieDirector}
-          onChange={(e) =>
-            setNewAdaptation({
-              ...newAdaptation,
-              movieDirector: e.target.value,
-            })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <textarea
           placeholder="Movie Description"
+          name="movieDesc"
           value={newAdaptation.movieDesc}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, movieDesc: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <textarea
           placeholder="Comparison"
+          name="comparison"
           value={newAdaptation.comparison}
-          onChange={(e) =>
-            setNewAdaptation({ ...newAdaptation, comparison: e.target.value })
-          }
+          onChange={handleChange}
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <div className="flex justify-between mt-4">

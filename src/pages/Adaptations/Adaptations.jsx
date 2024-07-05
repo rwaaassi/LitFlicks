@@ -12,18 +12,18 @@ const Adaptations = () => {
   const [showAddAdaptationForm, setShowAddAdaptationForm] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {
-    const fetchAdaptations = async () => {
-      try {
-        const adaptationsData = await getAdaptations();
-        setAdaptations(adaptationsData);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
+  const fetchAdaptations = async () => {
+    try {
+      const adaptationsData = await getAdaptations();
+      setAdaptations(adaptationsData || []);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchAdaptations();
 
     onAuthStateListener((user) => {
@@ -34,6 +34,12 @@ const Adaptations = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (!showAddAdaptationForm) {
+      fetchAdaptations();
+    }
+  }, [showAddAdaptationForm]);
 
   console.log(adaptations);
 
