@@ -8,6 +8,7 @@ import mockingbird from "../../assets/mockingbird.jpg";
 import godfather from "../../assets/godfather.jpg";
 import gatsby from "../../assets/gatsby.jpg";
 import { useNavigate } from "react-router-dom";
+import { HiArrowLongLeft } from "react-icons/hi2";
 
 const Home = () => {
   const [adaptations, setAdaptations] = useState([]);
@@ -55,6 +56,11 @@ const Home = () => {
     navigate(`/adaptation/${adaptation.id}`);
   };
 
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+
   if (adaptations.length === 0) {
     return <div>Loading...</div>;
   }
@@ -63,7 +69,7 @@ const Home = () => {
     <div className="relative w-full h-screen flex">
       {/* Slider Section */}
       <div
-        className="absolute inset-0 bg-cover bg-center z-0"
+        className="absolute inset-0 bg-cover bg-center z-0 cursor-pointer"
         style={{
           backgroundImage: `url(${adaptations[currentIndex].background})`,
           backgroundSize: "cover",
@@ -71,11 +77,14 @@ const Home = () => {
         }}
         onClick={() => handleSliderClicked(adaptations[currentIndex])}
       ></div>
-      <div className="relative w-1/2 h-full z-10 flex items-center justify-center">
+      <div className="relative w-1/2 h-full z-10 flex items-center justify-center ">
         <div className="absolute inset-0 bg-black opacity-70 w-full"></div>{" "}
-        <div className="relative z-20 flex items-center justify-center max-w-5xl mx-auto">
+        <div className="relative z-20 flex items-center justify-center max-w-5xl mx-auto cursor-pointer">
           {adaptations[currentIndex] && (
-            <div className="text-center">
+            <div
+              className="text-center"
+              onClick={() => handleSliderClicked(adaptations[currentIndex])}
+            >
               <img
                 src={adaptations[currentIndex].bookImage}
                 alt={adaptations[currentIndex].bookTitle}
@@ -85,18 +94,30 @@ const Home = () => {
             </div>
           )}
         </div>
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {adaptations.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full cursor-pointer ${
+                index === currentIndex ? "bg-white" : "bg-gray-500"
+              }`}
+              onClick={() => goToSlide(index)}
+            />
+          ))}
+        </div>
       </div>
       {/* Welcome Message Section */}
       <div className="w-1/2 flex flex-col justify-center items-center p-8">
         <p className="text-black text-3xl font-semibold mb-4">
           Welcome to LitFlicks
         </p>
-        <span className="text-black text-4xl font-bold mb-8">
+        <span className="text-emerald-800 text-3xl font-bold mb-8">
           Where Literature Meets Cinema
         </span>
-        <h1 className="text-2xl font-semibold mb-4">
-          Explore our latest additions
-        </h1>
+        <p className=" text-lg font-semibold mb-4">
+         &#10094;&#10094; Explore our latest additions
+          {/* <HiArrowLongLeft /> */}
+        </p>
       </div>
     </div>
   );
