@@ -7,8 +7,8 @@ import shawshank from "../../assets/shawshank.jpg";
 import mockingbird from "../../assets/mockingbird.jpg";
 import godfather from "../../assets/godfather.jpg";
 import gatsby from "../../assets/gatsby.jpg";
-import { useNavigate } from "react-router-dom";
-import { HiArrowLongLeft } from "react-icons/hi2";
+import { useNavigate, Link } from "react-router-dom";
+import { HiArrowLongRight } from "react-icons/hi2";
 
 const Home = () => {
   const [adaptations, setAdaptations] = useState([]);
@@ -66,19 +66,39 @@ const Home = () => {
   }
 
   return (
-    <div className="relative w-full h-screen flex">
+    <div
+      className="relative w-full flex"
+      style={{ height: "calc(100vh - 4rem)" }}
+    >
+      {/* Welcome Message Section */}
+      <div className="w-1/2 flex flex-col justify-center items-center p-8">
+        <p className="text-black text-3xl font-semibold mb-4">
+          Welcome to LitFlicks
+        </p>
+        <span className="text-black text-3xl font-bold mb-8">
+          Where Literature Meets Cinema
+        </span>
+        <p className=" text-lg font-semibold mb-4">
+          <Link to="/adaptations" className="text-teal-800 hover:text-teal-600">
+            Explore our Latest Additions &#10095;&#10095;
+          </Link>
+        </p>
+      </div>
+
       {/* Slider Section */}
-      <div
-        className="absolute inset-0 bg-cover bg-center z-0 cursor-pointer"
-        style={{
-          backgroundImage: `url(${adaptations[currentIndex].background})`,
-          backgroundSize: "cover",
-          width: "49.5vw",
-        }}
-        onClick={() => handleSliderClicked(adaptations[currentIndex])}
-      ></div>
-      <div className="relative w-1/2 h-full z-10 flex items-center justify-center ">
-        <div className="absolute inset-0 bg-black opacity-70 w-full"></div>{" "}
+      <div className="relative w-1/2 h-full z-10 flex items-center justify-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0 cursor-pointer"
+          style={{
+            backgroundImage: `url(${adaptations[currentIndex].background})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            width: "100%", 
+            height: "100%",
+          }}
+          onClick={() => handleSliderClicked(adaptations[currentIndex])}
+        ></div>
+        <div className="absolute inset-0 bg-black opacity-70 w-full"></div>
         <div className="relative z-20 flex items-center justify-center max-w-5xl mx-auto cursor-pointer">
           {adaptations[currentIndex] && (
             <div
@@ -105,19 +125,6 @@ const Home = () => {
             />
           ))}
         </div>
-      </div>
-      {/* Welcome Message Section */}
-      <div className="w-1/2 flex flex-col justify-center items-center p-8">
-        <p className="text-black text-3xl font-semibold mb-4">
-          Welcome to LitFlicks
-        </p>
-        <span className="text-emerald-800 text-3xl font-bold mb-8">
-          Where Literature Meets Cinema
-        </span>
-        <p className=" text-lg font-semibold mb-4">
-         &#10094;&#10094; Explore our latest additions
-          {/* <HiArrowLongLeft /> */}
-        </p>
       </div>
     </div>
   );
