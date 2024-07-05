@@ -1,22 +1,21 @@
-import  { useState, useEffect } from "react";
-import { getAdaptations} from "../../services/adaptationsApi"; 
+import { useState, useEffect } from "react";
+import { getAdaptations } from "../../services/adaptationsApi";
 import { useNavigate } from "react-router-dom";
 import AddAdaptation from "../../Hooks/AddAdaptation";
 import { onAuthStateListener } from "../../context/UsersApi";
-
 
 const Adaptations = () => {
   const [adaptations, setAdaptations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
- const [showAddAdaptationForm, setShowAddAdaptationForm] = useState(false);
-   const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+  const [showAddAdaptationForm, setShowAddAdaptationForm] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchAdaptations = async () => {
       try {
-        const adaptationsData = await getAdaptations(); 
+        const adaptationsData = await getAdaptations();
         setAdaptations(adaptationsData);
         setLoading(false);
       } catch (error) {
@@ -27,20 +26,20 @@ const Adaptations = () => {
 
     fetchAdaptations();
 
-     onAuthStateListener((user) => {
-       if (user) {
-         setIsAdmin(user.role === "admin");
-       } else {
-         setIsAdmin(false);
-       }
-     });
+    onAuthStateListener((user) => {
+      if (user) {
+        setIsAdmin(user.role === "admin");
+      } else {
+        setIsAdmin(false);
+      }
+    });
   }, []);
 
   console.log(adaptations);
 
-   const handleAdaptationClicked = (adaptation) => {
-     navigate(`/adaptation/${adaptation.id}`);
-   };
+  const handleAdaptationClicked = (adaptation) => {
+    navigate(`/adaptation/${adaptation.id}`);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -51,7 +50,7 @@ const Adaptations = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-orange-50 flex flex-col justify-center items-center gap-10">
+    <div className="container mx-auto px-4 py-8 bg-white flex flex-col justify-center items-center gap-10">
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
       ) : (
@@ -59,34 +58,31 @@ const Adaptations = () => {
           {adaptations.map((adaptation) => (
             <li
               key={adaptation.id}
-              className="bg-white rounded-lg shadow-md p-4 cursor-pointer"
+              className="bg-orange-100 rounded-lg shadow-md p-4 cursor-pointer w-[500px] h-[500px]"
               onClick={() => handleAdaptationClicked(adaptation)}
             >
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1">
+              <div className="relative flex justify-center items-center h-[80%] w-full">
+                <div className="relative mr-36">
                   <img
                     src={adaptation.moviePoster}
                     alt={`Poster for ${adaptation.movieTitle}`}
-                    className="rounded-lg mb-4"
-                    style={{ maxHeight: "300px" }}
+                    className="rounded-lg ml-14"
+                    style={{ maxHeight: "18.75rem" }}
                   />
-                  <h2 className="text-xl font-bold">{adaptation.movieTitle}</h2>
-                  <p className="text-gray-600">
-                    Movie Duration: {adaptation.movieDuration} minutes
-                  </p>
-                </div>
-                <div className="flex-1">
                   <img
                     src={adaptation.bookImage}
                     alt={`Cover for ${adaptation.bookTitle}`}
-                    className="rounded-lg mb-4"
-                    style={{ maxHeight: "300px" }}
+                    className="rounded-lg absolute z-20"
+                    style={{
+                      maxHeight: "18.75rem",
+                      left: "60%",
+                      top: "3.125rem",
+                    }}
                   />
-                  <h3 className="text-xl font-bold">{adaptation.bookTitle}</h3>
-                  <p className="text-gray-600">
-                    Book Pages: {adaptation.bookPages}
-                  </p>
                 </div>
+                <h2 className="absolute bottom-0 right-30 top-[400px] text-xl font-bold bg-opacity-75 p-2 rounded-lg">
+                  {adaptation.movieTitle}
+                </h2>
               </div>
             </li>
           ))}
