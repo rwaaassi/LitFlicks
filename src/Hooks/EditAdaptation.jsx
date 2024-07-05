@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { CiEdit } from "react-icons/ci";
 
 const EditAdaptation = ({
@@ -48,10 +47,6 @@ const handleKeyDown = (e) => {
     setIsEditing(false);
   }
 };
-
-
- 
-
 
   return (
     <div className="flex items-center">

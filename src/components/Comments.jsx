@@ -7,6 +7,8 @@ import {
   authState,
 } from "../services/adaptationsApi";
 import { useParams } from "react-router-dom";
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const Comments = () => {
   const { adaptationId } = useParams();
@@ -97,21 +99,39 @@ const Comments = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mt-4">
+    <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-10">
       <h3 className="text-lg font-semibold mb-2">Comments</h3>
       <div className="space-y-4">
         {/* Display all comments */}
         {allComments.map((comment) => (
           <div key={comment.id} className="border-b border-gray-200 pb-2">
-            <p className="text-sm text-gray-600">
-              <strong>{comment.email}:</strong> {comment.text}
+            <p className=" text-black font-bold">
+              {comment.email}: <span className="font-semibold">{comment.text}</span>
+              {!isAdmin && user && user.uid === comment.userId && (
+                <span className="ml-2">
+                  <button
+                    className="bg-green-500 text-white px-2 py-1 rounded"
+                    onClick={() =>
+                      handleEditComment(comment.id, "Updated text")
+                    }
+                  >
+                    <CiEdit />
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                    onClick={() => handleCommentDelete(comment.id)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
+                </span>
+              )}
             </p>
           </div>
         ))}
       </div>
       {!isAdmin && (
         <div>
-          <h3 className="text-lg font-semibold mt-4 mb-2">Your Comment</h3>
+          {/* Your Comment section */}
           {editCommentMode ? (
             <>
               <textarea
@@ -144,13 +164,13 @@ const Comments = () => {
                       className="bg-green-500 text-white px-4 py-2 rounded-lg"
                       onClick={handleEditComment}
                     >
-                      Edit
+                      <CiEdit />
                     </button>
                     <button
                       className="bg-red-500 text-white px-4 py-2 rounded-lg"
                       onClick={handleCommentDelete}
                     >
-                      Delete
+                      <RiDeleteBin6Line />
                     </button>
                   </div>
                 </>

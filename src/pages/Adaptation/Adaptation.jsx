@@ -90,155 +90,195 @@ const Adaptation = () => {
   }
 
   return (
-    <div>
-      <div className="flex flex-col p-10 sm:flex-row gap-4 w-full">
-        {/* Movie Details */}
-        <div className="flex-1 flex gap-10 bg-white">
-          <div className="relative w-1/2">
-            {isAdmin && (
-              <EditAdaptation
-                adaptationId={adaptationId}
-                onSave={(value) => handleSave("moviePoster", value)}
+    <div className="p-2  bg-teal-950">
+      <div className=" border-4 border-white">
+        <div className="flex flex-col  p-10 sm:flex-row gap-4 w-full">
+          {/* Movie Details */}
+          <div className="flex-1 flex gap-10 bg-teal-900 text-white rounded-[15px]">
+            <div className="relative w-1/2">
+              {isAdmin && (
+                <EditAdaptation
+                  adaptationId={adaptationId}
+                  onSave={(value) => handleSave("moviePoster", value)}
+                />
+              )}
+              <img
+                src={adaptation.moviePoster}
+                alt={`Poster for ${adaptation.movieTitle}`}
+                className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4 "
               />
-            )}
-            <img
-              src={adaptation.moviePoster}
-              alt={`Poster for ${adaptation.movieTitle}`}
-              className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4 "
-            />
+            </div>
+            <div className="flex flex-col justify-start gap-2 p-2 pl-4 w-1/2">
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.movieTitle}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("movieTitle", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Title:{" "}
+                    <span className="font-semibold">
+                      {adaptation.movieTitle}{" "}
+                    </span>
+                  </h2>
+                )}
+              </div>
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.movieDirector}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("movieDirector", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Director:{" "}
+                    <span className="font-semibold">
+                      {" "}
+                      {adaptation.movieDirector}{" "}
+                    </span>
+                  </h2>
+                )}
+              </div>
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.movieDuration}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("movieDuration", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Duration:{" "}
+                    <span className="font-semibold">
+                      {" "}
+                      {adaptation.movieDuration} Minutes
+                    </span>
+                  </h2>
+                )}
+              </div>
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.movieDesc}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("movieDesc", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Description:{" "}
+                    <span className="font-semibold">
+                      {adaptation.movieDesc}{" "}
+                    </span>{" "}
+                  </h2>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col justify-center pl-4 w-1/2">
-            <div className="mb-2">
-              {isAdmin ? (
+
+          {/* Book Details */}
+          <div className="flex-1 flex gap-10 bg-orange-50 rounded-[20px]">
+            <div className="relative w-1/2">
+              {isAdmin && (
                 <EditAdaptation
-                  value={adaptation.movieTitle}
                   adaptationId={adaptationId}
-                  onSave={(value) => handleSave("movieTitle", value)}
+                  onSave={(value) => handleSave("bookImage", value)}
                 />
-              ) : (
-                <h2 className="text-2xl font-bold">
-                  Title: {adaptation.movieTitle}
-                </h2>
               )}
+              <img
+                src={adaptation.bookImage}
+                alt={`Cover for ${adaptation.bookTitle}`}
+                className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4"
+              />
             </div>
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.movieDirector}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("movieDirector", value)}
-                />
-              ) : (
-                <p className="text-xl">Director: {adaptation.movieDirector}</p>
-              )}
-            </div>
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.movieDuration}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("movieDuration", value)}
-                />
-              ) : (
-                <p className="text-xl">
-                  Duration: {adaptation.movieDuration} minutes
-                </p>
-              )}
-            </div>
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.movieDesc}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("movieDesc", value)}
-                />
-              ) : (
-                <p className="text-xl">Description: {adaptation.movieDesc}</p>
-              )}
+            <div className="flex flex-col justify-start gap-2 p-2 pl-4 w-1/2 ">
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.bookTitle}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("bookTitle", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Title:{" "}
+                    <span className="font-semibold">
+                      {adaptation.bookTitle}{" "}
+                    </span>
+                  </h2>
+                )}
+              </div>
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.bookAuthor}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("bookAuthor", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Author:{" "}
+                    <span className="font-semibold">
+                      {" "}
+                      {adaptation.bookAuthor}
+                    </span>{" "}
+                  </h2>
+                )}
+              </div>
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.bookPages}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("bookPages", value)}
+                  />
+                ) : (
+                  <h2 className="text-lg font-bold">
+                    Pages:{" "}
+                    <span className="font-semibold">
+                      {adaptation.bookPages}{" "}
+                    </span>{" "}
+                  </h2>
+                )}
+              </div>
+              <div className="mb-2">
+                {isAdmin ? (
+                  <EditAdaptation
+                    value={adaptation.bookDesc}
+                    adaptationId={adaptationId}
+                    onSave={(value) => handleSave("bookDesc", value)}
+                  />
+                ) : (
+                  <p className="text-lg font-bold">
+                    Description:{" "}
+                    <span className="font-semibold">
+                      {" "}
+                      {adaptation.bookDesc}
+                    </span>
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Book Details */}
-        <div className="flex-1 flex gap-10 bg-white">
-          <div className="relative w-1/2">
-            {isAdmin && (
-              <EditAdaptation
-                adaptationId={adaptationId}
-                onSave={(value) => handleSave("bookImage", value)}
-              />
-            )}
-            <img
-              src={adaptation.bookImage}
-              alt={`Cover for ${adaptation.bookTitle}`}
-              className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4"
+        <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty object-center ml-10 bg-teal-900 text-white rounded-[20px]">
+          <h1 className="text-xl p-3 font-bold">Comparison</h1>
+          {isAdmin ? (
+            <EditAdaptation
+              label="comparison"
+              value={adaptation.comparison}
+              onSave={(value) => handleSave("comparison", value)}
             />
-          </div>
-          <div className="flex flex-col justify-center pl-4 w-1/2">
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.bookTitle}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("bookTitle", value)}
-                />
-              ) : (
-                <h2 className="text-2xl font-bold">
-                  Title: {adaptation.bookTitle}
-                </h2>
-              )}
-            </div>
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.bookAuthor}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("bookAuthor", value)}
-                />
-              ) : (
-                <p className="text-xl">Author: {adaptation.bookAuthor}</p>
-              )}
-            </div>
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.bookPages}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("bookPages", value)}
-                />
-              ) : (
-                <p className="text-xl">Pages: {adaptation.bookPages}</p>
-              )}
-            </div>
-            <div className="mb-2">
-              {isAdmin ? (
-                <EditAdaptation
-                  value={adaptation.bookDesc}
-                  adaptationId={adaptationId}
-                  onSave={(value) => handleSave("bookDesc", value)}
-                />
-              ) : (
-                <p className="text-xl">Description: {adaptation.bookDesc}</p>
-              )}
-            </div>
-          </div>
+          ) : (
+            <div>{renderComparison(adaptation.comparison)}</div>
+          )}
         </div>
-      </div>
 
-      <div className="p-5 mt-5 mb-5 w-[60%] flex flex-col justify-center text-pretty object-center ml-[350px]">
-        <h1 className="text-2xl p-3 font-bold">Comparison</h1>
-        {isAdmin ? (
-          <EditAdaptation
-            label="comparison"
-            value={adaptation.comparison}
-            onSave={(value) => handleSave("comparison", value)}
-          />
-        ) : (
-          <div>{renderComparison(adaptation.comparison)}</div>
-        )}
+        {isAdmin && <DeleteAdaptation adaptation={adaptation} />}
       </div>
-
-      {isAdmin && <DeleteAdaptation adaptation={adaptation} />}
 
       <Comments />
     </div>

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import {
   collection,
   doc,
@@ -7,9 +6,9 @@ import {
   updateDoc,
   deleteDoc,
   addDoc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
-import {auth, db } from "../firebase/firebaseConfig";
+import { auth, db } from "../firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 
 export const getAdaptations = async () => {
@@ -41,31 +40,15 @@ export const getAdaptationById = async (adaptationId) => {
   }
 };
 
-// export const useAddAdaptation = () => {
-//   const navigate = useNavigate();
-//   const addAdaptation = async (adaptationData) => {
-//     try {
-//       const collectionRef = collection(db, "adaptations");
-//       const docRef = await addDoc(collectionRef, adaptationData);
-//       navigate(`/adaptation/${docRef.id}`);
-//       return { id: docRef.id, ...adaptationData };
-//     } catch (error) {
-//       throw new Error("Error adding adaptation");
-//     }
-//   };
-
-//   return { addAdaptation };
-// };
-
 export const useAddAdaptation = () => {
   const addAdaptation = async (adaptationData) => {
     try {
       const collectionRef = collection(db, "adaptations");
       const docRef = await addDoc(collectionRef, adaptationData);
-      return { id: docRef.id, ...adaptationData }; // Return the added document data
+      return { id: docRef.id, ...adaptationData };
     } catch (error) {
       console.error("Error adding adaptation:", error.message);
-      throw new Error("Error adding adaptation"); // Throw the error for higher level handling
+      throw new Error("Error adding adaptation");
     }
   };
 
@@ -73,9 +56,7 @@ export const useAddAdaptation = () => {
 };
 
 export const useDeleteAdaptation = () => {
-
   const deleteAdaptation = async (adaptationId) => {
-    
     try {
       const docRef = doc(db, "adaptations", adaptationId);
       await deleteDoc(docRef);
@@ -83,12 +64,11 @@ export const useDeleteAdaptation = () => {
       throw new Error("Error deleting adaptation");
     }
   };
-  return {deleteAdaptation}
-}
+  return { deleteAdaptation };
+};
 
 export const useUpdateAdaptation = () => {
-
- const updateAdaptation = async (adaptationId, updatedData) => {
+  const updateAdaptation = async (adaptationId, updatedData) => {
     try {
       const docRef = doc(db, "adaptations", adaptationId);
       await updateDoc(docRef, updatedData);
@@ -96,14 +76,19 @@ export const useUpdateAdaptation = () => {
     } catch (error) {
       throw new Error("Error updating adaptation");
     }
-  
   };
-  return {updateAdaptation}
-}
+  return { updateAdaptation };
+};
 
 // Get user comment
 export const getUserComment = async (userId, adaptationId) => {
-  const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
+  const commentDocRef = doc(
+    db,
+    "adaptations",
+    adaptationId,
+    "comments",
+    userId
+  );
   const commentDoc = await getDoc(commentDocRef);
   if (commentDoc.exists()) {
     return { id: commentDoc.id, ...commentDoc.data() };
@@ -131,7 +116,7 @@ export const getAllComments = async (adaptationId) => {
 // Save user comment
 
 const getUserEmail = async (userId) => {
-  const userDocRef = doc(db, "users", userId); 
+  const userDocRef = doc(db, "users", userId);
   const userDoc = await getDoc(userDocRef);
   return userDoc.exists() ? userDoc.data().email : null;
 };
@@ -151,16 +136,15 @@ export const saveUserComment = async (userId, adaptationId, text) => {
   return { id: commentDoc.id, ...commentDoc.data() };
 };
 
-// export const saveUserComment = async (userId, adaptationId, text) => {
-//   const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
-//   await setDoc(commentDocRef, { userId, text });
-//   const commentDoc = await getDoc(commentDocRef);
-//   return { id: commentDoc.id, ...commentDoc.data() };
-// };
-
 // Delete user comment
 export const deleteUserComment = async (userId, adaptationId) => {
-  const commentDocRef = doc(db, "adaptations", adaptationId, "comments", userId);
+  const commentDocRef = doc(
+    db,
+    "adaptations",
+    adaptationId,
+    "comments",
+    userId
+  );
   await deleteDoc(commentDocRef);
 };
 
