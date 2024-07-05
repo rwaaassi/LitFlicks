@@ -99,94 +99,94 @@ const Comments = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-10">
-      <h3 className="text-lg font-semibold mb-2">Comments</h3>
-      <div className="space-y-4">
-        {/* Display all comments */}
-        {allComments.map((comment) => (
-          <div key={comment.id} className="border-b border-gray-200 pb-2">
-            <p className=" text-black font-bold">
-              {comment.email}: <span className="font-semibold">{comment.text}</span>
-              {!isAdmin && user && user.uid === comment.userId && (
-                <span className="ml-2">
+ <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-10">
+    <h3 className="text-lg font-semibold mb-2">Comments</h3>
+    <div className="space-y-4">
+      {/* Display all comments */}
+      {allComments.map((comment) => (
+        <div key={comment.id} className="border-b border-gray-200 pb-2">
+          <p className=" text-black font-bold">
+            {comment.email}: <span className="font-semibold">{comment.text}</span>
+            {!isAdmin && user && user.uid === comment.userId && (
+              <span className="ml-2">
+                <button
+                  className="bg-green-500 text-white px-2 py-1 rounded"
+                  onClick={() =>
+                    handleEditComment(comment.id, "Updated text")
+                  }
+                >
+                  <CiEdit />
+                </button>
+                <button
+                  className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                  onClick={() => handleCommentDelete(comment.id)}
+                >
+                  <RiDeleteBin6Line />
+                </button>
+              </span>
+            )}
+          </p>
+        </div>
+      ))}
+    </div>
+    {!isAdmin && (
+      <div>
+        {/* Your Comment section */}
+        {editCommentMode ? (
+          <>
+            <textarea
+              className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+              value={comment}
+              onChange={handleCommentChange}
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                className="bg-teal-950 text-white px-4 py-2 rounded-lg"
+                onClick={handleCommentSave}
+              >
+                Save
+              </button>
+              <button
+                className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            {hasCommented ? (
+              <>
+                <p>{comment}</p>
+                <div className="flex justify-end space-x-2">
                   <button
-                    className="bg-green-500 text-white px-2 py-1 rounded"
-                    onClick={() =>
-                      handleEditComment(comment.id, "Updated text")
-                    }
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg"
+                    onClick={handleEditComment}
                   >
                     <CiEdit />
                   </button>
                   <button
-                    className="bg-red-500 text-white px-2 py-1 rounded ml-2"
-                    onClick={() => handleCommentDelete(comment.id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                    onClick={handleCommentDelete}
                   >
                     <RiDeleteBin6Line />
                   </button>
-                </span>
-              )}
-            </p>
-          </div>
-        ))}
+                </div>
+              </>
+            ) : (
+              <button
+                className="bg-teal-950 text-white px-4 py-2 rounded-lg"
+                onClick={handleAddComment}
+              >
+                Add Comment
+              </button>
+            )}
+          </>
+        )}
       </div>
-      {!isAdmin && (
-        <div>
-          {/* Your Comment section */}
-          {editCommentMode ? (
-            <>
-              <textarea
-                className="w-full p-2 border border-gray-300 rounded-lg mb-2"
-                value={comment}
-                onChange={handleCommentChange}
-              />
-              <div className="flex justify-end space-x-2">
-                <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                  onClick={handleCommentSave}
-                >
-                  Save
-                </button>
-                <button
-                  className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                  onClick={handleCancelEdit}
-                >
-                  Cancel
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              {hasCommented ? (
-                <>
-                  <p>{comment}</p>
-                  <div className="flex justify-end space-x-2">
-                    <button
-                      className="bg-green-500 text-white px-4 py-2 rounded-lg"
-                      onClick={handleEditComment}
-                    >
-                      <CiEdit />
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                      onClick={handleCommentDelete}
-                    >
-                      <RiDeleteBin6Line />
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                  onClick={handleAddComment}
-                >
-                  Add Comment
-                </button>
-              )}
-            </>
-          )}
-        </div>
-      )}
-    </div>
+    )}
+  </div>
   );
 };
 export default Comments;

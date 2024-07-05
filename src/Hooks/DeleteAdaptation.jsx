@@ -20,9 +20,9 @@ const DeleteAdaptation = ({ adaptation }) => {
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       <button
-        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 mb-4"
+        className="px-4 py-2 bg-red-900 text-white rounded-md hover:bg-red-700 mb-4"
         onClick={handleDelete}
       >
         Delete Adaptation

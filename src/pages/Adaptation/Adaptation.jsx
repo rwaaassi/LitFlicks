@@ -90,8 +90,8 @@ const Adaptation = () => {
   }
 
   return (
-    <div className="p-2  bg-teal-950">
-      <div className=" border-4 border-white">
+    <div className="bg-white">
+      <div className="p-2  bg-teal-950">
         <div className="flex flex-col  p-10 sm:flex-row gap-4 w-full">
           {/* Movie Details */}
           <div className="flex-1 flex gap-10 bg-teal-900 text-white rounded-[15px]">

@@ -152,7 +152,7 @@ const AddAdaptation = ({ onClose }) => {
         <div className="flex justify-between mt-4">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="px-4 py-2 bg-teal-950 text-white rounded-md hover:bg-teal-700"
           >
             Add Adaptation
           </button>
