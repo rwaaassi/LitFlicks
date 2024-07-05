@@ -1,17 +1,37 @@
 import { useState, useEffect } from "react";
 import { getAdaptations } from "../../services/adaptationsApi";
 import background from "../../assets/background-home-2.jpg";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+// import atonement1 from "../../assets/atonement1.jpg"
+import atonement2 from "../../assets/atonement2.jpg";
+import shawshank from "../../assets/shawshank.jpg";
+import mockingbird from "../../assets/mockingbird.jpg";
+import godfather from "../../assets/godfather.jpg";
+import gatsby from "../../assets/gatsby.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [adaptations, setAdaptations] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  const adaptationBackgrounds = {
+    //  `url(${atonement1})`,
+    "Atonement": atonement2,
+    "The Shawshank Redemption": shawshank,
+    "To Kill a Mockingbird": mockingbird,
+    "The Godfather": godfather,
+    "The Great Gatsby": gatsby,
+  };
 
   useEffect(() => {
     const fetchAdaptations = async () => {
       try {
         const adaptationList = await getAdaptations();
-        const shuffledAdaptations = adaptationList.sort(
+        const adaptationsWithBackgrounds = adaptationList.map((adaptation) => ({
+          ...adaptation,
+          background: adaptationBackgrounds[adaptation.bookTitle],
+        }));
+        const shuffledAdaptations = adaptationsWithBackgrounds.sort(
           () => 0.5 - Math.random()
         );
         setAdaptations(shuffledAdaptations.slice(0, 5));
@@ -22,76 +42,63 @@ const Home = () => {
     fetchAdaptations();
   }, []);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % adaptations.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + adaptations.length) % adaptations.length
-    );
-  };
-
   useEffect(() => {
     const sliderId = setInterval(() => {
-      nextSlide();
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % adaptations.length);
     }, 2500);
     return () => {
       clearInterval(sliderId);
     };
-  }, [currentIndex, adaptations.length]);
+  }, [adaptations.length]);
+
+  const handleSliderClicked = (adaptation) => {
+    navigate(`/adaptation/${adaptation.id}`);
+  };
 
   if (adaptations.length === 0) {
     return <div>Loading...</div>;
   }
 
   return (
-    <section className="relative h-screen w-full bg-orange-50">
-      <img
-        src={background}
-        alt="background"
-        className="h-screen w-full object-fill"
-      />
-      <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-60 flex flex-col items-center justify-center space-y-4">
-        <p className="text-white text-3xl font-semibold">
-          Welcome to LitFlicks
-        </p>
-        <span className="text-white text-4xl font-bold">
-          Where Literature Meets Cinema
-        </span>
-      </div>
-
-      <div className="bg-orange-50">
-        {adaptations.length > 0 && (
-          <div className="relative w-80  mx-auto bg-blue-300">
-            <div className="flex items-center justify-between">
-              <FiChevronLeft
-                className="text-white text-3xl cursor-pointer bg-black/20 rounded"
-                onClick={prevSlide}
-              />
-              <div className="w-full bg-blue-300 p-4 rounded-lg flex items-center justify-center ">
-                {adaptations[currentIndex] && (
-                  <div className="text-center">
-                    <img
-                      src={adaptations[currentIndex].moviePoster}
-                      alt={adaptations[currentIndex].movieTitle}
-                      className="h-72 mx-auto mb-4"
-                    />
-                    <h2 className="text-lg font-semibold">
-                      {adaptations[currentIndex].movieTitle}
-                    </h2>
-                  </div>
-                )}
-              </div>
-              <FiChevronRight
-                className="text-white text-3xl cursor-pointer  bg-black/20 rounded"
-                onClick={nextSlide}
+    <div className="relative w-full h-screen flex">
+      {/* Slider Section */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{
+          backgroundImage: `url(${adaptations[currentIndex].background})`,
+          backgroundSize: "cover",
+          width: "49.5vw",
+        }}
+        onClick={() => handleSliderClicked(adaptations[currentIndex])}
+      ></div>
+      <div className="relative w-1/2 h-full z-10 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black opacity-70 w-full"></div>{" "}
+        <div className="relative z-20 flex items-center justify-center max-w-5xl mx-auto">
+          {adaptations[currentIndex] && (
+            <div className="text-center">
+              <img
+                src={adaptations[currentIndex].bookImage}
+                alt={adaptations[currentIndex].bookTitle}
+                className="h-72 w-full object-cover mx-auto mb-4 rounded-lg shadow-lg"
+                style={{ opacity: 1 }}
               />
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </section>
+      {/* Welcome Message Section */}
+      <div className="w-1/2 flex flex-col justify-center items-center p-8">
+        <p className="text-black text-3xl font-semibold mb-4">
+          Welcome to LitFlicks
+        </p>
+        <span className="text-black text-4xl font-bold mb-8">
+          Where Literature Meets Cinema
+        </span>
+        <h1 className="text-2xl font-semibold mb-4">
+          Explore our latest additions
+        </h1>
+      </div>
+    </div>
   );
 };
 
