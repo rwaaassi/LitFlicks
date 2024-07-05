@@ -56,27 +56,27 @@ const Adaptations = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-white flex flex-col justify-center items-center gap-10">
+    <div className="container mx-auto px-4 py-8 shadow-xl bg-orange-50 flex flex-col justify-center items-center gap-10">
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
       ) : (
-        <ul className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+        <ul className="grid gap-6 grid-cols-1  sm:grid-cols-2 lg:grid-cols-3">
           {adaptations.map((adaptation) => (
             <li
               key={adaptation.id}
-              className="bg-orange-100 rounded-lg shadow-md p-4 cursor-pointer w-[500px] h-[500px]"
+              className="bg-teal-950 rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white "
               onClick={() => handleAdaptationClicked(adaptation)}
             >
-              <div className="relative flex justify-center items-center h-[80%] w-full">
+              <div className="relative flex justify-center  items-center h-[80%] w-full">
                 <div className="relative mr-36">
                   <img
-                    src={adaptation.moviePoster}
+                    src={adaptation.bookImage}
                     alt={`Poster for ${adaptation.movieTitle}`}
                     className="rounded-lg ml-14"
                     style={{ maxHeight: "18.75rem" }}
                   />
                   <img
-                    src={adaptation.bookImage}
+                    src={adaptation.moviePoster}
                     alt={`Cover for ${adaptation.bookTitle}`}
                     className="rounded-lg absolute z-20"
                     style={{
