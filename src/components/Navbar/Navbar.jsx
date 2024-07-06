@@ -52,7 +52,7 @@ function Navbar() {
    
 
   return (
-    <header className="bg-[#404040] shadow-xl sticky top-0 z-50">
+    <header className="bg-[#6e6e6e] shadow-xl sticky top-0 z-50">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-4 md:gap-12">

@@ -151,9 +151,9 @@ const Adaptation = () => {
                   />
                 ) : (
                   <h2 className="text-lg font-semibold">
-                    Duration:
+                    Duration: 
                     <span className="font-normal text-white">
-                      {adaptation.movieDuration} Minutes
+                       {adaptation.movieDuration} Minutes
                     </span>
                   </h2>
                 )}

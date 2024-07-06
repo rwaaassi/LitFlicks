@@ -69,7 +69,7 @@ useEffect(() => {
 
   return (
     <div
-      className="relative w-full flex "
+      className="relative w-full flex  "
       style={{ height: "calc(100vh - 4rem)" }}
     >
       {/* Welcome Message Section */}
