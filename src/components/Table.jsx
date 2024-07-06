@@ -70,7 +70,7 @@ const Table = () => {
   };
 
   return (
-    <div className="flex flex-col text-white text-center bg-teal-900 p-3 rounded-[15px] w-72 justify-center ">
+    <div className="flex flex-col text-white text-center bg-[#153448] p-3 rounded-[15px] w-72 justify-center ">
       <div className={getClassName(0)} onClick={() => handleClick(0)}>
         Plot Fidelity
       </div>

@@ -90,11 +90,11 @@ const Adaptation = () => {
   }
 
   return (
-    <div className="bg-white">
-      <div className="p-2  bg-teal-950">
+    <div className="bg-orange-50">
+      <div className="p-2  bg-orange-50">
         <div className="flex flex-col  p-10 sm:flex-row gap-4 w-full">
           {/* Movie Details */}
-          <div className="flex-1 flex gap-10 bg-teal-900 text-white rounded-[15px]">
+          <div className="flex-1 flex gap-10 bg-orange-100 text-black rounded-[15px]">
             <div className="relative w-1/2">
               {isAdmin && (
                 <EditAdaptation
@@ -179,7 +179,7 @@ const Adaptation = () => {
           </div>
 
           {/* Book Details */}
-          <div className="flex-1 flex gap-10 bg-orange-50 rounded-[20px]">
+          <div className="flex-1 flex gap-10 bg-orange-100 text-black rounded-[20px]">
             <div className="relative w-1/2">
               {isAdmin && (
                 <EditAdaptation
@@ -263,22 +263,21 @@ const Adaptation = () => {
             </div>
           </div>
         </div>
-<div className="flex gap-10 justify-around">
-
-        <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty object-center ml-10 bg-teal-900 text-white rounded-[20px]">
-          <h1 className="text-xl p-3 font-bold">Comparison</h1>
-          {isAdmin ? (
-            <EditAdaptation
-              label="comparison"
-              value={adaptation.comparison}
-              onSave={(value) => handleSave("comparison", value)}
-            />
-          ) : (
-            <div>{renderComparison(adaptation.comparison)}</div>
-          )}
+        <div className="flex gap-10 justify-around">
+          <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty font-bold object-center ml-10 bg-orange-50 text-[#153448] rounded-[20px]">
+            <h1 className="text-xl p-3 font-bold">Comparison</h1>
+            {isAdmin ? (
+              <EditAdaptation
+                label="comparison"
+                value={adaptation.comparison}
+                onSave={(value) => handleSave("comparison", value)}
+              />
+            ) : (
+              <div>{renderComparison(adaptation.comparison)}</div>
+            )}
+          </div>
+          <Table />
         </div>
-          <Table/>
-</div>
 
         {isAdmin && <DeleteAdaptation adaptation={adaptation} />}
       </div>

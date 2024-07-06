@@ -24,24 +24,26 @@ const Home = () => {
     "The Great Gatsby": gatsby,
   };
 
-  useEffect(() => {
-    const fetchAdaptations = async () => {
-      try {
-        const adaptationList = await getAdaptations();
-        const adaptationsWithBackgrounds = adaptationList.map((adaptation) => ({
+useEffect(() => {
+  const fetchAdaptations = async () => {
+    try {
+      const adaptationList = await getAdaptations();
+      const adaptationsWithBackgrounds = adaptationList
+        .filter((adaptation) => adaptationBackgrounds[adaptation.bookTitle]) // Filter out adaptations without a background
+        .map((adaptation) => ({
           ...adaptation,
           background: adaptationBackgrounds[adaptation.bookTitle],
         }));
-        const shuffledAdaptations = adaptationsWithBackgrounds.sort(
-          () => 0.5 - Math.random()
-        );
-        setAdaptations(shuffledAdaptations.slice(0, 5));
-      } catch (error) {
-        console.error("Failed to fetch adaptations:", error);
-      }
-    };
-    fetchAdaptations();
-  }, []);
+      const shuffledAdaptations = adaptationsWithBackgrounds.sort(
+        () => 0.5 - Math.random()
+      );
+      setAdaptations(shuffledAdaptations.slice(0, 5));
+    } catch (error) {
+      console.error("Failed to fetch adaptations:", error);
+    }
+  };
+  fetchAdaptations();
+}, []);
 
   useEffect(() => {
     const sliderId = setInterval(() => {
@@ -67,19 +69,22 @@ const Home = () => {
 
   return (
     <div
-      className="relative w-full flex"
+      className="relative w-full flex "
       style={{ height: "calc(100vh - 4rem)" }}
     >
       {/* Welcome Message Section */}
-      <div className="w-1/2 flex flex-col justify-center items-center p-8">
-        <p className="text-black text-3xl font-semibold mb-4">
+      <div className="w-1/2 flex flex-col justify-center items-center p-8 bg-orange-50">
+        <p className="text-[#153448] text-3xl font-semibold mb-4">
           Welcome to LitFlicks
         </p>
-        <span className="text-black text-3xl font-bold mb-8">
+        <span className="text-[#153448] text-3xl font-bold mb-8">
           Where Literature Meets Cinema
         </span>
         <p className=" text-lg font-semibold mb-4">
-          <Link to="/adaptations" className="text-teal-800 hover:text-teal-600">
+          <Link
+            to="/adaptations"
+            className="text-[#153448] hover:text-[#7a2f11]"
+          >
             Explore our Latest Additions &#10095;&#10095;
           </Link>
         </p>
@@ -93,7 +98,7 @@ const Home = () => {
             backgroundImage: `url(${adaptations[currentIndex].background})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            width: "100%", 
+            width: "100%",
             height: "100%",
           }}
           onClick={() => handleSliderClicked(adaptations[currentIndex])}

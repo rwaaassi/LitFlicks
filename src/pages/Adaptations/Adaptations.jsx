@@ -56,7 +56,7 @@ const Adaptations = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 shadow-xl bg-orange-50 flex flex-col justify-center items-center gap-10">
+    <div className="container mx-auto px-4 py-8 shadow-xl border-2 border-orange-100 bg-orange-50 flex flex-col justify-center items-center gap-10 ">
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
       ) : (
@@ -64,7 +64,7 @@ const Adaptations = () => {
           {adaptations.map((adaptation) => (
             <li
               key={adaptation.id}
-              className="bg-teal-950 rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white "
+              className="bg-[#153448] rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white "
               onClick={() => handleAdaptationClicked(adaptation)}
             >
               <div className="relative flex justify-center  items-center h-[80%] w-full">

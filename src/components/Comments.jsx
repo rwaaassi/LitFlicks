@@ -99,9 +99,10 @@ const Comments = () => {
   };
 
   return (
- <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-10">
-    <h3 className="text-lg font-semibold mb-2">Comments</h3>
-    <div className="space-y-4">
+ <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-10 h-[25%]">
+    <h3 className="text-lg font-semibold mb-2">Comments & Discussions : </h3>
+    <hr />
+    <div className="space-y-4 mt-10">
       {/* Display all comments */}
       {allComments.map((comment) => (
         <div key={comment.id} className="border-b border-gray-200 pb-2">
@@ -176,7 +177,7 @@ const Comments = () => {
               </>
             ) : (
               <button
-                className="bg-teal-950 text-white px-4 py-2 rounded-lg"
+                className="bg-teal-950 text-white px-4 py-2 rounded-lg mt-20"
                 onClick={handleAddComment}
               >
                 Add Comment

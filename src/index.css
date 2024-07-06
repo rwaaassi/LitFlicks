@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-     font-family: "Playfair Display", serif;
+      font-family: "Lora", serif;
   }
 }
 @layer components {
   .nav-items {
-  @apply relative flex h-full items-center p-4 cursor-pointer font-bold text-amber-900 hover:text-amber-900 hover:bg-amber-800/10 transition-colors ease-in-out
+  @apply relative flex h-full items-center p-4 cursor-pointer font-bold text-white hover:text-white hover:bg-orange-50/5 transition-colors ease-in-out
 
   }
  
