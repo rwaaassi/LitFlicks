@@ -57,7 +57,7 @@ function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-4 md:gap-12">
             <Link to="/">
-              <img src={logo} alt="Logo" className="h-12" />
+              <img src={logo} alt="Logo" className="h-16 w-[13rem]" />
             </Link>
           </div>
           <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
@@ -94,7 +94,7 @@ function Navbar() {
                 </li>
                 <li>
                   <NavLink className="nav-items" to="/adaptations">
-                    Adaptations
+                    Adaptation
                   </NavLink>
                 </li>
                 {currentUser ? (

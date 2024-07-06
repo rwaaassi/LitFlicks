@@ -10,7 +10,7 @@
 }
 @layer components {
   .nav-items {
-  @apply relative flex h-full items-center p-4 cursor-pointer font-bold text-white hover:text-white hover:bg-orange-50/5 transition-colors ease-in-out
+  @apply relative flex h-full items-center p-4 cursor-pointer font-semibold text-[16px] text-white hover:text-white hover:bg-orange-50/5 transition-colors ease-in-out
 
   }
  
