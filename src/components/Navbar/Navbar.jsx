@@ -2,7 +2,7 @@ import { Outlet, NavLink, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { onAuthStateListener, logoutUser } from "../../context/UsersApi";
 import { getAdaptations } from "../../services/adaptationsApi";
-import logo from "../../assets/litflicksLogo.png";
+import logo from "../../assets/logo.png";
 
 function Navbar() {
   const [currentUser, setCurrentUser] = useState(null);
