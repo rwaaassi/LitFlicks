@@ -15,34 +15,26 @@ const AddAdaptation = ({ onClose }) => {
     movieDirector: "",
     movieDesc: "",
     comparison: "",
-    tableData: [
-      [
-        "Row 1, Col 1",
-        "Row 1, Col 2",
-        "Row 1, Col 3",
-        "Row 1, Col 4",
-        "Row 1, Col 5",
+    tableData: {
+      clickedCells: [
+        false, 
+        false, 
+        false, 
+        false, 
       ],
-      [
-        "Row 2, Col 1",
-        "Row 2, Col 2",
-        "Row 2, Col 3",
-        "Row 2, Col 4",
-        "Row 2, Col 5",
-      ],
-    ],
+    },
     comments: [],
   });
 
   const handleAddAdaptation = async (e) => {
     e.preventDefault();
-
-    // Transform tableData into a flat structure
-    const flatTableData = newAdaptation.tableData.flat();
+    const flatClickedCells = newAdaptation.tableData.clickedCells.flat();
 
     const transformedAdaptation = {
       ...newAdaptation,
-      tableData: flatTableData,
+      tableData: {
+clickedCells: flatClickedCells
+      } 
     };
 
     try {

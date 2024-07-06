@@ -8,7 +8,7 @@ import {
 } from "../../services/adaptationsApi";
 import DeleteAdaptation from "../../Hooks/DeleteAdaptation";
 import EditAdaptation from "../../Hooks/EditAdaptation";
-// import EditableTableCell from "../../components/EditableTabelCell";
+import Table from "../../components/Table"
 import { onAuthStateListener } from "../../context/UsersApi";
 import { renderComparison } from "../../Hooks/EditAdaptation";
 import Comments from "../../components/Comments";
@@ -263,6 +263,7 @@ const Adaptation = () => {
             </div>
           </div>
         </div>
+<div className="flex gap-10 justify-around">
 
         <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty object-center ml-10 bg-teal-900 text-white rounded-[20px]">
           <h1 className="text-xl p-3 font-bold">Comparison</h1>
@@ -276,6 +277,8 @@ const Adaptation = () => {
             <div>{renderComparison(adaptation.comparison)}</div>
           )}
         </div>
+          <Table/>
+</div>
 
         {isAdmin && <DeleteAdaptation adaptation={adaptation} />}
       </div>

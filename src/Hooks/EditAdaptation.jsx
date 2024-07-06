@@ -56,7 +56,7 @@ const handleKeyDown = (e) => {
             value={inputValue}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            className="border border-gray-300 p-1 mr-2 w-full resize-y"
+            className="border border-gray-300 p-1 mr-2 w-full resize-y text-black font-semibold"
             rows={2} 
           />
           <button
