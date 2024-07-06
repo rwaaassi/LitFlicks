@@ -62,7 +62,7 @@ clickedCells: flatClickedCells
           placeholder="Book Title"
           value={newAdaptation.bookTitle}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -70,7 +70,7 @@ clickedCells: flatClickedCells
           placeholder="Book Pages"
           value={newAdaptation.bookPages}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -78,7 +78,7 @@ clickedCells: flatClickedCells
           placeholder="Book Image URL"
           value={newAdaptation.bookImage}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -86,14 +86,14 @@ clickedCells: flatClickedCells
           placeholder="Book Author"
           value={newAdaptation.bookAuthor}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <textarea
           placeholder="Book Description"
           name="bookDesc"
           value={newAdaptation.bookDesc}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -101,7 +101,7 @@ clickedCells: flatClickedCells
           placeholder="Movie Title"
           value={newAdaptation.movieTitle}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -109,7 +109,7 @@ clickedCells: flatClickedCells
           placeholder="Movie Poster URL"
           value={newAdaptation.moviePoster}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -117,7 +117,7 @@ clickedCells: flatClickedCells
           placeholder="Movie Duration"
           value={newAdaptation.movieDuration}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <input
           type="text"
@@ -125,26 +125,26 @@ clickedCells: flatClickedCells
           placeholder="Movie Director"
           value={newAdaptation.movieDirector}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <textarea
           placeholder="Movie Description"
           name="movieDesc"
           value={newAdaptation.movieDesc}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <textarea
           placeholder="Comparison"
           name="comparison"
           value={newAdaptation.comparison}
           onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#153448]"
         />
         <div className="flex justify-between mt-4">
           <button
             type="submit"
-            className="px-4 py-2 bg-teal-950 text-white rounded-md hover:bg-teal-700"
+            className="px-4 py-2 bg-[#153448] text-white rounded-md hover:bg-[#2e6f9a]"
           >
             Add Adaptation
           </button>

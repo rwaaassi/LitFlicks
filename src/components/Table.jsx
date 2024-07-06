@@ -70,7 +70,7 @@ const Table = () => {
   };
 
   return (
-    <div className="flex flex-col text-white text-center bg-[#153448] p-3 rounded-[15px] w-72 justify-center ">
+    <div className="flex flex-col text-white text-center bg-[#153448] p-3 rounded-[15px]  h-1/3 mt-96 ">
       <div className={getClassName(0)} onClick={() => handleClick(0)}>
         Plot Fidelity
       </div>
@@ -80,7 +80,10 @@ const Table = () => {
       <div className={getClassName(2)} onClick={() => handleClick(2)}>
         Themes and Messages
       </div>
-      <div className={getClassName(3)} onClick={() => handleClick(3)}>
+      <div className={getClassName(3)} onClick={() => handleClick(2)}>
+       Casting
+      </div>
+      <div className={getClassName(4)} onClick={() => handleClick(3)}>
         Setting and World-Building
       </div>
     </div>

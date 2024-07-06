@@ -99,95 +99,96 @@ const Comments = () => {
   };
 
   return (
- <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-10 h-[25%]">
-    <h3 className="text-lg font-semibold mb-2">Comments & Discussions : </h3>
-    <hr />
-    <div className="space-y-4 mt-10">
-      {/* Display all comments */}
-      {allComments.map((comment) => (
-        <div key={comment.id} className="border-b border-gray-200 pb-2">
-          <p className=" text-black font-bold">
-            {comment.email}: <span className="font-semibold">{comment.text}</span>
-            {!isAdmin && user && user.uid === comment.userId && (
-              <span className="ml-2">
-                <button
-                  className="bg-green-500 text-white px-2 py-1 rounded"
-                  onClick={() =>
-                    handleEditComment(comment.id, "Updated text")
-                  }
-                >
-                  <CiEdit />
-                </button>
-                <button
-                  className="bg-red-500 text-white px-2 py-1 rounded ml-2"
-                  onClick={() => handleCommentDelete(comment.id)}
-                >
-                  <RiDeleteBin6Line />
-                </button>
-              </span>
-            )}
-          </p>
-        </div>
-      ))}
-    </div>
-    {!isAdmin && (
-      <div>
-        {/* Your Comment section */}
-        {editCommentMode ? (
-          <>
-            <textarea
-              className="w-full p-2 border border-gray-300 rounded-lg mb-2"
-              value={comment}
-              onChange={handleCommentChange}
-            />
-            <div className="flex justify-end space-x-2">
-              <button
-                className="bg-teal-950 text-white px-4 py-2 rounded-lg"
-                onClick={handleCommentSave}
-              >
-                Save
-              </button>
-              <button
-                className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                onClick={handleCancelEdit}
-              >
-                Cancel
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            {hasCommented ? (
-              <>
-                <p>{comment}</p>
-                <div className="flex justify-end space-x-2">
+    <div className="bg-white p-4 rounded-lg shadow-md mt-4 w-2/3 ml-[16rem] h-[25%]">
+      <h3 className="text-lg font-semibold mb-2">Comments & Discussions : </h3>
+      <hr />
+      <div className="space-y-4 mt-10">
+        {/* Display all comments */}
+        {allComments.map((comment) => (
+          <div key={comment.id} className="border-b border-gray-200 pb-2">
+            <p className=" text-black font-bold">
+              {comment.email}:{" "}
+              <span className="font-semibold">{comment.text}</span>
+              {!isAdmin && user && user.uid === comment.userId && (
+                <span className="ml-2">
                   <button
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg"
-                    onClick={handleEditComment}
+                    className="bg-green-500 text-white px-2 py-1 rounded"
+                    onClick={() =>
+                      handleEditComment(comment.id, "Updated text")
+                    }
                   >
                     <CiEdit />
                   </button>
                   <button
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                    onClick={handleCommentDelete}
+                    className="bg-red-500 text-white px-2 py-1 rounded ml-2"
+                    onClick={() => handleCommentDelete(comment.id)}
                   >
                     <RiDeleteBin6Line />
                   </button>
-                </div>
-              </>
-            ) : (
-              <button
-                className="bg-teal-950 text-white px-4 py-2 rounded-lg mt-20"
-                onClick={handleAddComment}
-              >
-                Add Comment
-              </button>
-            )}
-          </>
-        )}
+                </span>
+              )}
+            </p>
+          </div>
+        ))}
       </div>
-    )}
-  </div>
+      {!isAdmin && (
+        <div>
+          {/* Your Comment section */}
+          {editCommentMode ? (
+            <>
+              <textarea
+                className="w-full p-2 border border-gray-300 rounded-lg mb-2"
+                value={comment}
+                onChange={handleCommentChange}
+              />
+              <div className="flex justify-end space-x-2">
+                <button
+                  className="bg-teal-950 text-white px-4 py-2 rounded-lg"
+                  onClick={handleCommentSave}
+                >
+                  Save
+                </button>
+                <button
+                  className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+                  onClick={handleCancelEdit}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              {hasCommented ? (
+                <>
+                  <p>{comment}</p>
+                  <div className="flex justify-end space-x-2">
+                    <button
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg"
+                      onClick={handleEditComment}
+                    >
+                      <CiEdit />
+                    </button>
+                    <button
+                      className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                      onClick={handleCommentDelete}
+                    >
+                      <RiDeleteBin6Line />
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <button
+                  className="  px-4 py-2  mt-20 bg-[#153448] text-white rounded-md hover:bg-[#2e6f9a]"
+                  onClick={handleAddComment}
+                >
+                  Add Comment
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 export default Comments;

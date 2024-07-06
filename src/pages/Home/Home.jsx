@@ -83,7 +83,7 @@ useEffect(() => {
         <p className=" text-lg font-semibold mb-4">
           <Link
             to="/adaptations"
-            className="text-[#153448] hover:text-[#7a2f11]"
+            className="text-[#153448] hover:text-red-600"
           >
             Explore our Latest Additions &#10095;&#10095;
           </Link>
