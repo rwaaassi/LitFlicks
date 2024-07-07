@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useDeleteAdaptation } from "../services/adaptationsApi";
+import { showToastInfoMessage } from "../components/toast/Toast";
 
 const DeleteAdaptation = ({ adaptation }) => {
   const navigate = useNavigate();
   const { deleteAdaptation } = useDeleteAdaptation();
 
   const handleDelete = async () => {
+  showToastInfoMessage("Attempting to delete adaptation...")
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this adaptation?"
     );

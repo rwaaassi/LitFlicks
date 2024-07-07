@@ -3,8 +3,6 @@ import { getAdaptations } from "../../services/adaptationsApi";
 import { useNavigate } from "react-router-dom";
 import AddAdaptation from "../../Hooks/AddAdaptation";
 import { onAuthStateListener } from "../../context/UsersApi";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Adaptations = () => {
   const [adaptations, setAdaptations] = useState([]);
@@ -49,13 +47,6 @@ const Adaptations = () => {
     navigate(`/adaptation/${adaptation.id}`);
   };
 
-  const handleAddAdaptationClick= () => {
-    setShowAddAdaptationForm(true)
-  }
-  const handleAddAdaptation = () => {
-    setShowAddAdaptationForm(false);
-    toast.success("Adaptation is Successfully added");
-  };
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -74,6 +65,7 @@ const Adaptations = () => {
             <li
               key={adaptation.id}
               className="bg-[#153448] rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white relative mr-36 transition-transform  duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+              
               onClick={() => handleAdaptationClicked(adaptation)}
             >
               <div className="relative flex justify-center  items-center h-[80%] w-full">
@@ -108,13 +100,13 @@ const Adaptations = () => {
         <>
           <button
             className="px-4 py-2 text-white rounded-md mb-4 flex justify-center items-center bg-[#153448] hover:bg-[#2e6f9a]"
-            onClick={handleAddAdaptationClick}
+            onClick={() => setShowAddAdaptationForm(true)}
           >
             Add Adaptation
           </button>
 
           {showAddAdaptationForm && (
-            <AddAdaptation onClose={() => setShowAddAdaptationForm(false)} onAdd={handleAddAdaptation} />
+            <AddAdaptation onClose={() => setShowAddAdaptationForm(false)} />
           )}
         </>
       )}

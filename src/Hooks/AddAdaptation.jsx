@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useAddAdaptation } from "../services/adaptationsApi";
+import { showToastSuccessMessage } from "../components/toast/Toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddAdaptation = ({ onClose }) => {
   const { addAdaptation } = useAddAdaptation();
@@ -39,6 +41,7 @@ clickedCells: flatClickedCells
 
     try {
       await addAdaptation(transformedAdaptation);
+       showToastSuccessMessage("Adaptation is successfully added");
       onClose();
     } catch (error) {
       console.error("Error adding adaptation:", error);
