@@ -58,11 +58,11 @@ const handleKeyDown = (e) => {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             className="border border-gray-300 p-1 mr-2 w-full resize-y text-black font-semibold"
-            rows={2} 
+            rows={2}
           />
           <button
             onClick={handleSaveClick}
-            className="mr-2 bg-red-500 rounded-lg p-1 text-white hover:bg-red-400"
+            className="mr-2 bg-[#153448] rounded-lg p-1 text-white hover:bg-[#2e6f9a]"
           >
             Save
           </button>
