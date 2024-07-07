@@ -55,9 +55,9 @@ function Navbar() {
     <header className="bg-[#153448] shadow-xl sticky top-0 z-50  ">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-4 md:gap-12 ">
+          <div className="flex items-center gap-4 md:gap-12 sm:w-[30%]">
             <Link to="/">
-              <img src={logo} alt="Logo" className="h-16 w-[11rem]" />
+              <img src={logo} alt="Logo" className="h-16 w-[11rem] " />
             </Link>
           </div>
           <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
@@ -66,7 +66,7 @@ function Navbar() {
               placeholder="Search For Adaptation"
               value={searchQuery}
               onChange={handleSearchInputChange}
-              className="block w-full px-4 py-2 border border-gray-500 rounded-md shadow-xl focus:outline-none focus:ring-2 focus:ring-red-600"
+              className="block w-full px-4 py-2  border border-gray-500 rounded-md shadow-xl focus:outline-none focus:ring-2 focus:ring-red-600 "
             />
             {searchQuery && filteredAdaptations.length > 0 && (
               <div className="absolute left-0 right-0 mt-1 bg-white rounded-md shadow-lg border border-gray-600 z-50">
@@ -86,7 +86,7 @@ function Navbar() {
           </div>
           <div>
             <nav>
-              <ul className="flex items-center gap-4 sm:gap-6 text-sm">
+              <ul className="flex items-center gap-4 sm:gap-3 sm:text-sm text-sm">
                 <li>
                   <NavLink className="nav-items" to="/">
                     Home
