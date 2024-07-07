@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
-
+import { showToastSuccessMessage } from "../components/toast/Toast";
 const EditAdaptation = ({
   label,
   value = "",
@@ -29,6 +29,7 @@ const EditAdaptation = ({
 
     setIsEditing(false);
     onSave(inputValue);
+    showToastSuccessMessage("Changes Saved Successfully!");
   };
 
   const handleCancelClick = () => {

@@ -9,6 +9,7 @@ import {
 import { useParams } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { showToastSuccessMessage } from "./toast/Toast";
 
 const Comments = () => {
   const { adaptationId } = useParams();
@@ -64,6 +65,7 @@ const Comments = () => {
         setEditCommentMode(false);
         const comments = await getAllComments(adaptationId);
         setAllComments(comments);
+        showToastSuccessMessage("Comment Saved Successfully!");
       } catch (error) {
         console.error("Error saving comment:", error);
       }
@@ -80,6 +82,7 @@ const Comments = () => {
         setEditCommentMode(false);
         const comments = await getAllComments(adaptationId);
         setAllComments(comments);
+        showToastSuccessMessage("Comment Deleted Successfully!");
       } catch (error) {
         console.error("Error deleting comment:", error);
       }
