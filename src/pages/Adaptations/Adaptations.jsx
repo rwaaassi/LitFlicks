@@ -64,7 +64,7 @@ const Adaptations = () => {
           {adaptations.map((adaptation) => (
             <li
               key={adaptation.id}
-              className="bg-[#153448] rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white relative mr-36 transition-transform  duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+              className="bg-[#153448] rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white relative mr-36 transition-transform  duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg "
               
               onClick={() => handleAdaptationClicked(adaptation)}
             >

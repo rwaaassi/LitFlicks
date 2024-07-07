@@ -94,7 +94,7 @@ const Adaptation = () => {
       <div className="bg-orange-50 flex flex-col">
         <div className="container flex flex-col p-4 md:p-10 items-center mx-auto">
           {/* Movie Details */}
-          <div className="flex flex-col md:flex-row items-centre gap-4 md:gap-8 text-orange-50 rounded-lg border-2 border-white shadow-lg p-10 w-full md:w-auto">
+          <div className="flex flex-col bg-[#faeddd] md:flex-row items-centre gap-4 md:gap-8 text-orange-50 rounded-lg border-2 border-white shadow-lg p-10 w-full md:w-auto">
             <div className="w-full md:w-[25rem] h-auto md:h-[30rem]">
               {isAdmin && (
                 <EditAdaptation
@@ -167,7 +167,7 @@ const Adaptation = () => {
           </div>
 
           {/* Book Details */}
-          <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8 text-orange-50 rounded-lg mt-8 border-2 border-white shadow-lg p-10">
+          <div className="flex flex-col bg-[#faeddd] md:flex-row items-start gap-4 md:gap-8 text-orange-50 rounded-lg mt-8 border-2 border-white shadow-lg p-10">
             <div className="w-full md:w-[25rem] h-auto md:h-[30rem]">
               {isAdmin && (
                 <EditAdaptation
@@ -237,7 +237,7 @@ const Adaptation = () => {
         </div>
 
         <div className="flex gap-10 justify-around">
-          <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty font-bold object-center ml-10 bg-orange-50 text-[#153448] rounded-[20px] border-2 border-[#153448] md:w-[50rem] sm:w-[40rem] ">
+          <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty font-bold object-center ml-10 bg-orange-50 text-[#153448] rounded-[20px] border-2 border-[#153448] shadow-xl md:w-[50rem] sm:w-[40rem] ">
             <h1 className="text-xl justify-center text-center bg-[#153448] text-white font-bold">
               Comparison
             </h1>

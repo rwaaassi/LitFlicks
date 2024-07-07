@@ -69,15 +69,15 @@ useEffect(() => {
 
   return (
     <div
-      className="relative w-full flex  "
+      className="relative w-full flex sm:flex-row  "
       style={{ height: "calc(100vh - 4rem)" }}
     >
       {/* Welcome Message Section */}
-      <div className="w-1/2 flex flex-col justify-center items-center p-8 bg-orange-50">
-        <p className="text-[#153448] text-3xl font-semibold mb-4">
+      <div className="w-1/2 sm:w-1/2 flex flex-col justify-center items-center p-8 bg-orange-50">
+        <p className="text-[#153448] lg:text-3xl font-semibold mb-4 md:text-2xl ">
           Welcome to LitFlicks
         </p>
-        <span className="text-[#153448] text-3xl font-bold mb-8">
+        <span className="text-[#153448] lg:text-3xl md:2xl font-bold mb-8">
           Where Literature Meets Cinema
         </span>
         <p className=" text-lg font-semibold mb-4">

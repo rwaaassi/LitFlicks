@@ -102,8 +102,8 @@ const Comments = () => {
   };
 
   return (
-    <div className="flex  justify-center ">
-      <div className="flex flex-col bg-white p-4 rounded-lg shadow-md w-2/3 h-[25%]">
+    <div className="flex  justify-center  ">
+      <div className="flex flex-col bg-white p-4 rounded-lg shadow-xl w-2/3 h-[25%]">
         <h3 className="text-lg font-semibold mb-2">
           Comments & Discussions :{" "}
         </h3>
