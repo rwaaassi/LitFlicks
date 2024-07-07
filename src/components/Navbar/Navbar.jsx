@@ -52,12 +52,12 @@ function Navbar() {
    
 
   return (
-    <header className="bg-[#6e6e6e] shadow-xl sticky top-0 z-50">
+    <header className="bg-[#153448] shadow-xl sticky top-0 z-50  ">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-4 md:gap-12">
+          <div className="flex items-center gap-4 md:gap-12 ">
             <Link to="/">
-              <img src={logo} alt="Logo" className="h-16 w-[13rem]" />
+              <img src={logo} alt="Logo" className="h-16 w-[11rem]" />
             </Link>
           </div>
           <div className="relative w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
@@ -94,7 +94,7 @@ function Navbar() {
                 </li>
                 <li>
                   <NavLink className="nav-items" to="/adaptations">
-                    Adaptation
+                    Adaptations
                   </NavLink>
                 </li>
                 {currentUser ? (

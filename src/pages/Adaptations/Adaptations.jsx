@@ -56,15 +56,16 @@ const Adaptations = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 shadow-xl border-2 border-orange-100 bg-orange-50 flex flex-col justify-center items-center gap-10 ">
+    <div className="container mx-auto  px-24 py-12 shadow-xl border-2 border-orange-100 bg-orange-50 flex flex-col justify-center items-center gap-10 ">
       {adaptations.length === 0 ? (
         <p className="text-gray-600">No adaptations found.</p>
       ) : (
-        <ul className="grid gap-6 grid-cols-1  sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-10 grid-cols-1  sm:grid-cols-2 lg:grid-cols-3">
           {adaptations.map((adaptation) => (
             <li
               key={adaptation.id}
-              className="bg-[#153448] rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white "
+              className="bg-[#153448] rounded-lg shadow-lg p-4 cursor-pointer w-full h-[500px] text-white relative mr-36 transition-transform  duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
+              
               onClick={() => handleAdaptationClicked(adaptation)}
             >
               <div className="relative flex justify-center  items-center h-[80%] w-full">

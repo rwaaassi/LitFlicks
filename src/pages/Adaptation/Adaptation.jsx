@@ -91,11 +91,11 @@ const Adaptation = () => {
 
   return (
     <div className="bg-orange-50 p-10">
-      <div className="p-2  bg-orange-50">
-        <div className="flex flex-col  p-10 sm:flex-row gap-10 w-full">
+      <div className="bg-orange-50 flex flex-col">
+        <div className="container flex flex-col p-4 md:p-10 items-center mx-auto">
           {/* Movie Details */}
-          <div className="flex-1 flex gap-10 bg-[#153448] text-orange-50 rounded-[15px]">
-            <div className="relative w-1/2">
+          <div className="flex flex-col md:flex-row items-centre gap-4 md:gap-8 text-orange-50 rounded-lg border-2 border-white shadow-lg p-10 w-full md:w-auto">
+            <div className="w-full md:w-[30rem] h-auto md:h-[35rem]">
               {isAdmin && (
                 <EditAdaptation
                   adaptationId={adaptationId}
@@ -105,11 +105,11 @@ const Adaptation = () => {
               <img
                 src={adaptation.moviePoster}
                 alt={`Poster for ${adaptation.movieTitle}`}
-                className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4 "
+                className="rounded-lg object-cover w-full md:w-[30rem] h-auto md:h-[35rem] p-4"
               />
             </div>
-            <div className="flex flex-col justify-start gap-1 w-1/2 mr-5 mt-10">
-              <div className="mb-2">
+            <div className="flex flex-col justify-start w-full overflow-auto max-h-[35rem]">
+              <div className="bg-[#153448] rounded-lg  mt-40 p-10">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.movieTitle}
@@ -117,15 +117,11 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("movieTitle", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-semibold mb-2">
                     Title:{" "}
-                    <span className="font-normal">
-                      {adaptation.movieTitle}{" "}
-                    </span>
+                    <span className="font-normal">{adaptation.movieTitle}</span>
                   </h2>
                 )}
-              </div>
-              <div className="mb-2">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.movieDirector}
@@ -133,16 +129,13 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("movieDirector", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-semibold mb-2">
                     Director:{" "}
                     <span className="font-normal">
-                      {" "}
-                      {adaptation.movieDirector}{" "}
+                      {adaptation.movieDirector}
                     </span>
                   </h2>
                 )}
-              </div>
-              <div className="mb-2">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.movieDuration}
@@ -150,15 +143,13 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("movieDuration", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
-                    Duration: 
+                  <h2 className="text-lg font-semibold mb-2">
+                    Duration:{" "}
                     <span className="font-normal text-white">
-                       {adaptation.movieDuration} Minutes
+                      {adaptation.movieDuration} Minutes
                     </span>
                   </h2>
                 )}
-              </div>
-              <div className="mb-2">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.movieDesc}
@@ -166,9 +157,9 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("movieDesc", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-semibold mb-2">
                     Description:{" "}
-                    <span className="font-normal">{adaptation.movieDesc} </span>
+                    <span className="font-normal">{adaptation.movieDesc}</span>
                   </h2>
                 )}
               </div>
@@ -176,8 +167,8 @@ const Adaptation = () => {
           </div>
 
           {/* Book Details */}
-          <div className="flex-1 flex gap-10 bg-[#153448] text-orange-50 rounded-[20px]">
-            <div className="relative w-1/2">
+          <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8 text-orange-50 rounded-lg mt-8 border-2 border-white shadow-lg p-10">
+            <div className="w-full md:w-[30rem] h-auto md:h-[35rem]">
               {isAdmin && (
                 <EditAdaptation
                   adaptationId={adaptationId}
@@ -187,11 +178,11 @@ const Adaptation = () => {
               <img
                 src={adaptation.bookImage}
                 alt={`Cover for ${adaptation.bookTitle}`}
-                className="rounded-[20px] mb-4 object-cover w-full h-[550px] p-4"
+                className="rounded-lg object-cover w-full md:w-[30rem] h-auto md:h-[35rem] p-4"
               />
             </div>
-            <div className="flex flex-col justify-start gap-1 w-1/2 mr-5 mt-10 ">
-              <div className="mb-2">
+            <div className="flex flex-col justify-start w-full overflow-auto max-h-[35rem]">
+              <div className="bg-[#153448] rounded-lg mt-40 p-10">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.bookTitle}
@@ -199,13 +190,11 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("bookTitle", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-semibold mb-2">
                     Title:{" "}
-                    <span className="font-normal">{adaptation.bookTitle} </span>
+                    <span className="font-normal">{adaptation.bookTitle}</span>
                   </h2>
                 )}
-              </div>
-              <div className="mb-2">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.bookAuthor}
@@ -213,16 +202,11 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("bookAuthor", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-semibold mb-2">
                     Author:{" "}
-                    <span className="font-normal">
-                      {" "}
-                      {adaptation.bookAuthor}
-                    </span>{" "}
+                    <span className="font-normal">{adaptation.bookAuthor}</span>
                   </h2>
                 )}
-              </div>
-              <div className="mb-2">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.bookPages}
@@ -230,13 +214,11 @@ const Adaptation = () => {
                     onSave={(value) => handleSave("bookPages", value)}
                   />
                 ) : (
-                  <h2 className="text-lg font-semibold">
+                  <h2 className="text-lg font-semibold mb-2">
                     Pages:{" "}
-                    <span className="font-normal">{adaptation.bookPages} </span>{" "}
+                    <span className="font-normal">{adaptation.bookPages}</span>
                   </h2>
                 )}
-              </div>
-              <div className="mb-2">
                 {isAdmin ? (
                   <EditAdaptation
                     value={adaptation.bookDesc}
@@ -246,16 +228,17 @@ const Adaptation = () => {
                 ) : (
                   <p className="text-lg font-semibold">
                     Description:{" "}
-                    <span className="font-normal"> {adaptation.bookDesc}</span>
+                    <span className="font-normal">{adaptation.bookDesc}</span>
                   </p>
                 )}
               </div>
             </div>
           </div>
         </div>
-        <div className="flex gap-10 justify-around  ">
-          <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty font-bold object-center ml-10 bg-orange-50 text-[#153448] rounded-[20px]">
-            <h1 className="text-xl justify-center text-center bg-[#153448] text-white font-bold ">
+
+        <div className="flex gap-10 justify-around">
+          <div className="p-5 mt-5 mb-5 w-[66.5%] flex flex-col justify-center text-pretty font-bold object-center ml-10 bg-orange-50 text-[#153448] rounded-[20px] border-2 border-[#153448]">
+            <h1 className="text-xl justify-center text-center bg-[#153448] text-white font-bold">
               Comparison
             </h1>
             {isAdmin ? (
@@ -265,13 +248,13 @@ const Adaptation = () => {
                 onSave={(value) => handleSave("comparison", value)}
               />
             ) : (
-              <div className=" p-10 border-2 border-[#153448]">
+              <div className="p-10 ">
                 {renderComparison(adaptation.comparison)}
               </div>
             )}
           </div>
 
-          <Table />
+          {/* <Table /> */}
         </div>
 
         {isAdmin && <DeleteAdaptation adaptation={adaptation} />}
