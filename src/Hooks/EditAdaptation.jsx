@@ -62,7 +62,7 @@ const handleKeyDown = (e) => {
           />
           <button
             onClick={handleSaveClick}
-            className="mr-2 bg-[#153448] rounded-lg p-1 text-white hover:bg-[#2e6f9a]"
+            className="mr-2 bg-green-500 rounded-lg p-1 text-white hover:bg-green-300"
           >
             Save
           </button>
